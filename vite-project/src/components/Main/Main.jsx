@@ -30,12 +30,6 @@ const Main = ({ cardList }) => {
                 cardList={cardList.filter((card) => card.status === status)}
               />
             ))}
-
-            {/* <Column title="Без статуса" /> */}
-            {/*  <Column title="Нужно сделать" />
-            <Column title="В работе" />
-            <Column title="Тестирование" />
-            <Column title="Готово" /> */}
           </div>
         </div>
       </div>
