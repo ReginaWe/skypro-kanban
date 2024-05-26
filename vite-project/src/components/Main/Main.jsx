@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import Column from "../Column/Column";
+import * as S from "./Main.styled";
+import { Container } from "../shared.styled";
 
 const statusList = [
   "Без статуса",
@@ -18,22 +20,23 @@ const Main = ({ cardList }) => {
   }, []);
 
   return (
-    <main className="main">
-      <div className="container">
-        <div className="main__block">
-          <div className="main__content">
+    <S.Main>
+      <Container>
+        <S.MainBlock>
+          <S.MainContent>
             {isLoading && <p>Идет загрузка...</p>}
-            {!isLoading && statusList.map((status) => (
-              <Column
-                key={status}
-                title={status}
-                cardList={cardList.filter((card) => card.status === status)}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
-    </main>
+            {!isLoading &&
+              statusList.map((status) => (
+                <Column
+                  key={status}
+                  title={status}
+                  cardList={cardList.filter((card) => card.status === status)}
+                />
+              ))}
+          </S.MainContent>
+        </S.MainBlock>
+      </Container>
+    </S.Main>
   );
 };
 
