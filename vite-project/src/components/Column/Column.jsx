@@ -1,22 +1,18 @@
 import Card from "../Card/Card";
+import * as S from "./Column.styled";
 
 const Column = ({ title, cardList }) => {
   return (
-    <div className="main__column column">
-      <div className="column__title">
+    <S.MainColumn>
+      <S.ColumnTitle>
         <p>{title}</p>
-      </div>
-      <div className="cards">
-        {cardList.map(({id, topic, title, date}) => (
-          <Card
-            key={id}
-            topic={topic}
-            title={title}
-            date={date}
-          />
+      </S.ColumnTitle>
+      <S.Cards>
+        {cardList.map(({ id, topic, title, date }) => (
+          <Card key={id} topic={topic} title={title} date={date} />
         ))}
-      </div>
-    </div>
+      </S.Cards>
+    </S.MainColumn>
   );
 };
 

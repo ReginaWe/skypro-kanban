@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Container } from "../shared.styled";
+import * as S from "./Header.styled"
 
 const Header = ({ setCards, cards }) => {
   const [isOpen, setOpen] = useState(false);
@@ -21,9 +23,9 @@ const Header = ({ setCards, cards }) => {
   };
 
   return (
-    <header className="header">
-      <div className="container">
-        <div className="header__block">
+    <S.Header>
+      <Container>
+        <S.HeaderBlock>
           <div className="header__logo _show _light">
             <a href="" target="_self">
               <img src="images/logo.png" alt="logo" />
@@ -34,7 +36,7 @@ const Header = ({ setCards, cards }) => {
               <img src="images/logo_dark.png" alt="logo" />
             </a>
           </div>
-          <nav className="header__nav">
+          <S.HeaderNav>
             <button
               className="header__btn-main-new _hover01"
               onClick={onAddCard}
@@ -57,10 +59,10 @@ const Header = ({ setCards, cards }) => {
                 </button>
               </div>
             )}
-          </nav>
-        </div>
-      </div>
-    </header>
+          </S.HeaderNav>
+        </S.HeaderBlock>
+      </Container>
+    </S.Header>
   );
 };
 
