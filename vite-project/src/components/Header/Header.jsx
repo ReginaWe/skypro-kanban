@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Container } from "../shared.styled";
-import * as S from "./Header.styled"
+import * as S from "./Header.styled";
 
 const Header = ({ setCards, cards }) => {
   const [isOpen, setOpen] = useState(false);
@@ -41,19 +41,19 @@ const Header = ({ setCards, cards }) => {
               className="header__btn-main-new _hover01"
               onClick={onAddCard}
             >
-              Создать новую задачу
+              <a href="#popNewCard">Создать новую задачу</a>
             </button>
             <div className="header__user _hover02" onClick={handleOpen}>
               Ivan Ivanov
             </div>
             {isOpen && (
               <div className="header__pop-user-set pop-user-set">
-                <p className="pop-user-set__name">Ivan Ivanov</p>
-                <p className="pop-user-set__mail">ivan.ivanov@gmail.com</p>
-                <div className="pop-user-set__theme">
+                <S.PopUserSetName>Ivan Ivanov</S.PopUserSetName>
+                <S.PopUserSetMail>ivan.ivanov@gmail.com</S.PopUserSetMail>
+                <S.PopUserSetTheme>
                   <p>Темная тема</p>
                   <input type="checkbox" className="checkbox" name="checkbox" />
-                </div>
+                </S.PopUserSetTheme>
                 <button type="button" className="_hover03">
                   <a href="#popExit">Выйти</a>
                 </button>

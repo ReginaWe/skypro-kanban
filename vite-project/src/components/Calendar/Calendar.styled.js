@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { SubTitle } from "../shared.styled";
 
 export const CalendarBlock = styled.div`
   display: block;
@@ -22,4 +23,37 @@ export const CalendarContent = styled.div`
 `;
 export const CalendarPeriod = styled.div`
   padding: 0 7px;
+`;
+
+export const CalendarTitle = styled.p`
+  margin-bottom: 14px;
+  padding: 0 7px;
+
+  ${SubTitle}
+`;
+export const Calendar = styled.div`
+  width: 182px;
+  margin-bottom: 20px;
+`;
+export const CalendarNavAction = styled.div`
+  width: 18px;
+  height: 25px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & svg {
+    fill: #94a6be;
+  }
+`;
+
+export const CalendarDateEnd = styled.p`
+  color: #94a6be;
+  font-size: 10px;
+  line-height: 1;
+
+  & span {
+    color: #000000;
+  }
 `;

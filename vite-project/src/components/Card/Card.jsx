@@ -1,11 +1,11 @@
-import * as S from "./Card.styled"
+import * as S from "./Card.styled";
 const Card = ({ topic, title, date }) => {
   return (
     <S.CardsItem>
       <S.CardsCard>
         <S.CardGroup>
           <S.CardTopic $topicColor="_purple">
-            <S.TopicText topicColor="_purple">{topic}</S.TopicText>
+            <S.TopicText>{topic}</S.TopicText>
           </S.CardTopic>
           <a href="#popBrowse" target="_self">
             <S.CardBtn>
@@ -48,7 +48,7 @@ const Card = ({ topic, title, date }) => {
                 </clipPath>
               </defs>
             </svg>
-            <p>{date}</p>
+            <S.CardDateValue>{date}</S.CardDateValue>
           </S.CardDate>
         </S.CardContent>
       </S.CardsCard>

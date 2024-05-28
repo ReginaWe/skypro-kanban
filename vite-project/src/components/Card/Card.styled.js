@@ -59,6 +59,13 @@ export const CardDate = styled.div`
   align-items: center;
   justify-content: flex-start;
 `;
+export const CardDateValue = styled.p`
+  margin-left: 6px;
+  font-size: 10px;
+  line-height: 13px;
+  color: #94a6be;
+  letter-spacing: 0.2px;
+`;
 
 export const TopicText = styled.p`
   font-size: 10px;
