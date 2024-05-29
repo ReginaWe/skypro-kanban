@@ -20,4 +20,29 @@ export const SubTitle = css`
   line-height: 1;
 `;
 
+export const Hover01 = css`
+&:hover {
+  background-color: #33399b;
+}
+`
+export const Hover02 = css`
+&:hover {
+  color: #33399b;
+}
+&:hover::after {
+  border-left-color: #33399b;
+  border-bottom-color: #33399b;
+}
+`
+
+export const Hover03 = css`
+&:hover {
+  background-color: #33399b;
+  color: #FFFFFF;
+}
+&:hover a {
+  color: #FFFFFF;
+}
+`
+
 

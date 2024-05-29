@@ -106,7 +106,7 @@
 .pop-exit__block {
   display: block;
   margin: 0 auto;
-  background-color: #FFFFFF;
+  background-color: #FFFFFF; /* ${({ theme }) => theme.back} */
   max-width: 370px;
   width: 100%;
   padding: 50px 60px;
@@ -272,7 +272,7 @@
   width: 100%;
   padding: 40px 30px 48px;
   border-radius: 10px;
-  border: 0.7px solid #D4DBE5;
+  border: 0.7px solid #D4DBE5; /* ${({ theme }) => theme.back} */
   position: relative;
 }
 .pop-new-card__content {
@@ -535,7 +535,7 @@
   width: 100%;
   padding: 40px 30px 38px;
   border-radius: 10px;
-  border: 0.7px solid #D4DBE5;
+  border: 0.7px solid #D4DBE5; /* ${({ theme }) => theme.back} */
   position: relative;
 }
 .pop-browse__content {

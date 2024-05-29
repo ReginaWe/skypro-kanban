@@ -15,7 +15,7 @@ export const PopExitContainer = styled.div`
 export const PopExitBlock = styled.div`
   display: block;
   margin: 0 auto;
-  background-color: #ffffff;
+  background-color: ${({ theme }) => theme.back};
   max-width: 370px;
   width: 100%;
   padding: 50px 60px;
@@ -39,3 +39,33 @@ export const PopExitFormGroup = styled.div`
   align-items: center;
   justify-content: space-between;
 `;
+
+export const PopExitButton = styled.button``
+
+export const PopExitButtonYes = styled(PopExitButton)``
+
+export const PopExitButtonNo = styled(PopExitButton)`
+width: 153px;
+  height: 30px;
+  background-color: transparent;
+  border-radius: 4px;
+  border: 0.7px solid ${({ theme }) => theme.extra};
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  line-height: 21px;
+  font-weight: 500;
+  letter-spacing: -0.14px;
+  color: #FFFFFF;
+
+& a {
+  width: 100%;
+  height: 100%;
+  color: ${({ theme }) => theme.extra};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+`

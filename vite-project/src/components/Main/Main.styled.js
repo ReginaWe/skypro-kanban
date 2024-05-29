@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const Main = styled.main`
   width: 100%;
-  background-color: #eaeef6;
 `;
 export const MainBlock = styled.div`
   width: 100%;

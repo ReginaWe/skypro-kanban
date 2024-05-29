@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { topicStyles } from "../../lib/topic";
+import { getStyle, topicStyles } from "../../lib/topic";
 
 export const CardsItem = styled.div`
   padding: 5px;
@@ -11,7 +11,7 @@ export const CardsItem = styled.div`
 export const CardsCard = styled.div`
   width: 220px;
   height: 130px;
-  background-color: #ffffff;
+  background-color: ${({ theme }) => theme.back};
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -78,10 +78,12 @@ export const CardTopic = styled.div`
   height: 20px;
   padding: 5px 14px;
   border-radius: 18px;
-  background-color: ${({ $topicColor }) =>
+  /* background-color: ${({ $topicColor }) =>
     topicStyles[$topicColor]?.backgroundColor || "#b4fdd1"};
 
   ${TopicText} {
     color: ${({ $topicColor }) => topicStyles[$topicColor]?.color || "#06b16e"};
-  }
+  } */
+
+  ${(props) => getStyle(props.$topic, props.theme.name)}
 `;

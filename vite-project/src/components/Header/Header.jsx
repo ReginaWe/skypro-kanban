@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Container } from "../shared.styled";
 import * as S from "./Header.styled";
 
-const Header = ({ setCards, cards }) => {
+const Header = ({ toggleTheme, theme, setCards, cards }) => {
   const [isOpen, setOpen] = useState(false);
 
   const handleOpen = () => {
@@ -26,23 +26,23 @@ const Header = ({ setCards, cards }) => {
     <S.Header>
       <Container>
         <S.HeaderBlock>
-          <div className="header__logo _show _light">
+          <S.HeaderLogo>
             <a href="" target="_self">
-              <img src="images/logo.png" alt="logo" />
+              <img src={`/images/logo${theme === "dark" ? "_dark" : ""}.png`} alt="logo" />
             </a>
-          </div>
-          <div className="header__logo _dark">
+            {/* <a href="" target="_self">
+              <img src="images/logo.png" alt="logo" />
+            </a> */}
+          </S.HeaderLogo>
+          {/* <S.HeaderLogo>
             <a href="" target="_self">
               <img src="images/logo_dark.png" alt="logo" />
             </a>
-          </div>
+          </S.HeaderLogo> */}
           <S.HeaderNav>
-            <button
-              className="header__btn-main-new _hover01"
-              onClick={onAddCard}
-            >
+            <S.HeaderButtonMainNew onClick={onAddCard}>
               <a href="#popNewCard">Создать новую задачу</a>
-            </button>
+            </S.HeaderButtonMainNew>
             <div className="header__user _hover02" onClick={handleOpen}>
               Ivan Ivanov
             </div>
@@ -52,11 +52,16 @@ const Header = ({ setCards, cards }) => {
                 <S.PopUserSetMail>ivan.ivanov@gmail.com</S.PopUserSetMail>
                 <S.PopUserSetTheme>
                   <p>Темная тема</p>
-                  <input type="checkbox" className="checkbox" name="checkbox" />
+                  <input
+                    type="checkbox"
+                    className="checkbox"
+                    name="checkbox"
+                    onClick={toggleTheme}
+                  />
                 </S.PopUserSetTheme>
-                <button type="button" className="_hover03">
+                <S.HeaderExitButton>
                   <a href="#popExit">Выйти</a>
-                </button>
+                </S.HeaderExitButton>
               </div>
             )}
           </S.HeaderNav>
