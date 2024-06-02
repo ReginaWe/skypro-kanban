@@ -43,11 +43,9 @@ const Header = ({ toggleTheme, theme, setCards, cards }) => {
             <S.HeaderButtonMainNew onClick={onAddCard}>
               <a href="#popNewCard">Создать новую задачу</a>
             </S.HeaderButtonMainNew>
-            <div className="header__user _hover02" onClick={handleOpen}>
-              Ivan Ivanov
-            </div>
+            <S.HeaderUser onClick={handleOpen}>Ivan Ivanov</S.HeaderUser>
             {isOpen && (
-              <div className="header__pop-user-set pop-user-set">
+              <S.HeaderPopUserSet>
                 <S.PopUserSetName>Ivan Ivanov</S.PopUserSetName>
                 <S.PopUserSetMail>ivan.ivanov@gmail.com</S.PopUserSetMail>
                 <S.PopUserSetTheme>
@@ -62,7 +60,7 @@ const Header = ({ toggleTheme, theme, setCards, cards }) => {
                 <S.HeaderExitButton>
                   <a href="#popExit">Выйти</a>
                 </S.HeaderExitButton>
-              </div>
+              </S.HeaderPopUserSet>
             )}
           </S.HeaderNav>
         </S.HeaderBlock>

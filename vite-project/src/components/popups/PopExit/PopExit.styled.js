@@ -1,4 +1,18 @@
 import styled from "styled-components";
+import { Hover01, Hover03 } from "../../shared.styled";
+
+
+export const PopExit = styled.div`
+  display: none;
+  width: 100%;
+  height: 100%;
+  min-width: 320px;
+  min-height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+`;
 
 export const PopExitContainer = styled.div`
   width: 100%;
@@ -40,12 +54,38 @@ export const PopExitFormGroup = styled.div`
   justify-content: space-between;
 `;
 
-export const PopExitButton = styled.button``
+export const PopExitButton = styled.button``;
 
-export const PopExitButtonYes = styled(PopExitButton)``
+export const PopExitButtonYes = styled(PopExitButton)`
+  width: 153px;
+  height: 30px;
+  background-color: #565eef;
+  border-radius: 4px;
+  border: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  line-height: 21px;
+  font-weight: 500;
+  letter-spacing: -0.14px;
+  color: #ffffff;
+  margin-right: 10px;
+  & a {
+    width: 100%;
+    height: 100%;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  ${Hover01}
+`;
 
 export const PopExitButtonNo = styled(PopExitButton)`
-width: 153px;
+  width: 153px;
   height: 30px;
   background-color: transparent;
   border-radius: 4px;
@@ -58,14 +98,16 @@ width: 153px;
   line-height: 21px;
   font-weight: 500;
   letter-spacing: -0.14px;
-  color: #FFFFFF;
+  color: #ffffff;
 
-& a {
-  width: 100%;
-  height: 100%;
-  color: ${({ theme }) => theme.extra};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-`
+  & a {
+    width: 100%;
+    height: 100%;
+    color: ${({ theme }) => theme.extra};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  ${Hover03}
+`;

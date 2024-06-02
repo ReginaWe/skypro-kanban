@@ -54,6 +54,6 @@ export const CalendarDateEnd = styled.p`
   line-height: 1;
 
   & span {
-    color: #000000;
+    color: ${({ theme }) => theme.text};
   }
 `;

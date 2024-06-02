@@ -81,8 +81,21 @@ export const HeaderUser = styled.div`
   justify-content: center;
   font-size: 14px;
   line-height: 20px;
-  color: #565eef;
+  color: ${({ theme }) => theme.extra};
   cursor: pointer;
+
+  &::after {
+    content: "";
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 1px;
+    border-left: 1.9px solid ${({ theme }) => theme.extra};
+    border-bottom: 1.9px solid ${({ theme }) => theme.extra};
+    transform: rotate(-45deg);
+    margin: -6px 0 0 5px;
+    padding: 0;
+  }
 
   ${Hover02}
 `;
@@ -100,4 +113,20 @@ export const HeaderExitButton = styled.button`
   }
 
   ${Hover03}
+`;
+
+export const HeaderPopUserSet = styled.div`
+  display: block;
+  position: absolute;
+  top: 61px;
+  right: 0;
+  width: 213px;
+  height: 205px;
+  border-radius: 10px;
+  border: 0.7px solid rgba(148, 166, 190, 0.4);
+  background: ${({ theme }) => theme.back};
+  box-shadow: 0px 10px 39px 0px rgba(26, 56, 101, 0.21);
+  padding: 34px;
+  text-align: center;
+  z-index: 2;
 `;

@@ -2,7 +2,7 @@ import * as S from "./PopExit.styled"
 
 const PopExit = () => {
   return (
-    <div className="pop-exit" id="popExit">
+    <S.PopExit>
       <S.PopExitContainer>
         <S.PopExitBlock>
           <S.PopExitTtl>
@@ -10,17 +10,17 @@ const PopExit = () => {
           </S.PopExitTtl>
           <form className="pop-exit__form" id="formExit" action="#">
             <S.PopExitFormGroup>
-              <button className="pop-exit__exit-yes _hover01" id="exitYes">
+              <S.PopExitButtonYes id="exitYes">
                 <a href="modal/signin.html">Да, выйти</a>{" "}
-              </button>
-              <button className="pop-exit__exit-no _hover03" id="exitNo">
+              </S.PopExitButtonYes>
+              <S.PopExitButtonNo id="exitNo">
                 <a href="main.html">Нет, остаться</a>{" "}
-              </button>
+              </S.PopExitButtonNo>
             </S.PopExitFormGroup>
           </form>
         </S.PopExitBlock>
       </S.PopExitContainer>
-    </div>
+    </S.PopExit>
   );
 };
 

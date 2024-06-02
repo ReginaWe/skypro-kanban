@@ -1,5 +1,5 @@
 import * as S from "./Calendar.styled";
-import { NavActions } from "../shared.styled";
+import { CalendarDayName, CalendarDaysNames, CalendsrCells, NavActions } from "../shared.styled";
 
 const Calendar = () => {
   return (
@@ -32,16 +32,16 @@ const Calendar = () => {
           </NavActions>
         </S.CalendarNav>
         <S.CalendarContent>
-          <div className="calendar__days-names">
-            <div className="calendar__day-name">пн</div>
-            <div className="calendar__day-name">вт</div>
-            <div className="calendar__day-name">ср</div>
-            <div className="calendar__day-name">чт</div>
-            <div className="calendar__day-name">пт</div>
-            <div className="calendar__day-name -weekend-">сб</div>
-            <div className="calendar__day-name -weekend-">вс</div>
-          </div>
-          <div className="calendar__cells">
+          <CalendarDaysNames>
+            <CalendarDayName>пн</CalendarDayName>
+            <CalendarDayName>вт</CalendarDayName>
+            <CalendarDayName>ср</CalendarDayName>
+            <CalendarDayName>чт</CalendarDayName>
+            <CalendarDayName>пт</CalendarDayName>
+            <CalendarDayName>сб</CalendarDayName>
+            <CalendarDayName>вс</CalendarDayName>
+          </CalendarDaysNames>
+          <CalendsrCells>
             <div className="calendar__cell _other-month">28</div>
             <div className="calendar__cell _other-month">29</div>
             <div className="calendar__cell _other-month">30</div>
@@ -79,7 +79,7 @@ const Calendar = () => {
             <div className="calendar__cell _cell-day">29</div>
             <div className="calendar__cell _cell-day _weekend">30</div>
             <div className="calendar__cell _other-month _weekend">1</div>
-          </div>
+          </CalendsrCells>
         </S.CalendarContent>
 
         <input type="hidden" id="datepick_value" value="08.09.2023" />
