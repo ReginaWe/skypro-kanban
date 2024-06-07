@@ -28,7 +28,7 @@ export const HeaderNav = styled.nav`
 `;
 
 export const PopUserSetName = styled.p`
-  color: #000;
+  color: ${({ theme }) => theme.text};
   font-size: 14px;
   font-weight: 500;
   line-height: 21px;
