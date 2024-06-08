@@ -9,7 +9,7 @@ const Column = ({ title, cardList }) => {
       </S.ColumnTitle>
       <S.Cards>
         {cardList.map(({ id, topic, title, date }) => (
-          <Card key={id} topic={topic} title={title} date={date} />
+          <Card key={id} topic={topic} title={title} date={date} id={id} />
         ))}
       </S.Cards>
     </S.MainColumn>

@@ -16,13 +16,14 @@ function App() {
 
   /* const isAuth = true; */
 
-  const [isAuth, setIsAuth] = useState(true);
+  const [isAuth, setIsAuth] = useState(false);
 
   return (
     <Routes>
       <Route element={<PrivateRoute isAuth={isAuth} />}>
-        <Route path={AppRoutes.MAIN} element={<MainPage />} />
-        <Route path={AppRoutes.CARD} element={<CardPage />} />
+        <Route path={AppRoutes.MAIN} element={<MainPage />}>
+          <Route path={AppRoutes.CARD} element={<CardPage />} />
+        </Route>
         {/* Exit */}
       </Route>
       {/*  <Route path={AppRoutes.LOGIN} element={<LoginPage />} /> */}

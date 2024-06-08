@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import * as S from "./Card.styled";
-const Card = ({ topic, title, date }) => {
+const Card = ({ topic, title, date, id }) => {
   return (
     <S.CardsItem>
       <S.CardsCard>
@@ -8,7 +8,7 @@ const Card = ({ topic, title, date }) => {
           <S.CardTopic $topic={topic}>
             <S.TopicText>{topic}</S.TopicText>
           </S.CardTopic>
-          <Link to="/card/5">
+          <Link to={`/card/${id}`}>
             <S.CardBtn>
               <div></div>
               <div></div>

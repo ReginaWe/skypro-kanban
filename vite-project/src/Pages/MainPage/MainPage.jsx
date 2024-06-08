@@ -9,6 +9,7 @@ import { cardList } from "../../data";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle, Wrapper } from "../../global.styled";
 import { darkTheme, lightTheme } from "../../components/Themes";
+import { Outlet } from "react-router-dom";
 
 function MainPage() {
   const [theme, setTheme] = useState("light");
@@ -27,6 +28,7 @@ function MainPage() {
         {/* <PopExit />
         <PopNewCard />
         <PopBrowse /> */}
+        <Outlet />
         <Header
           toggleTheme={toggleTheme}
           theme={theme}
