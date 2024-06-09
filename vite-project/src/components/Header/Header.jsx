@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Container } from "../shared.styled";
 import * as S from "./Header.styled";
+import { Link } from "react-router-dom";
 
 const Header = ({ toggleTheme, theme, setCards, cards }) => {
   const [isOpen, setOpen] = useState(false);
@@ -58,7 +59,7 @@ const Header = ({ toggleTheme, theme, setCards, cards }) => {
                   />
                 </S.PopUserSetTheme>
                 <S.HeaderExitButton>
-                  <a href="#popExit">Выйти</a>
+                  <Link to="/exit">Выйти</Link>
                 </S.HeaderExitButton>
               </S.HeaderPopUserSet>
             )}

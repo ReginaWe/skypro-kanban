@@ -1,7 +1,8 @@
 import styled from "styled-components";
-import { Hover01, Hover03 } from "../../shared.styled";
+import { Hover01, Hover03 } from "../../components/shared.styled";
 
-export const PopExit = styled.div`
+export const LoginPage = styled.div`
+  display: none;
   width: 100%;
   height: 100%;
   min-width: 320px;
@@ -12,7 +13,7 @@ export const PopExit = styled.div`
   z-index: 5;
 `;
 
-export const PopExitContainer = styled.div`
+export const LoginPageContainer = styled.div`
   width: 100%;
   height: 100%;
   min-height: 100vh;
@@ -24,7 +25,7 @@ export const PopExitContainer = styled.div`
   background: rgba(0, 0, 0, 0.4);
 `;
 
-export const PopExitBlock = styled.div`
+export const LoginPageBlock = styled.div`
   /* display: block; */
   margin: 0 auto;
   background-color: ${({ theme }) => theme.back};
@@ -36,7 +37,7 @@ export const PopExitBlock = styled.div`
   box-shadow: 0px 4px 67px -12px rgba(0, 0, 0, 0.13);
 `;
 
-export const PopExitTtl = styled.div`
+export const LoginPageTtl = styled.div`
   text-align: center;
   font-size: 20px;
   font-weight: 700;
