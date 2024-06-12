@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { Hover01, Hover03 } from "../../components/shared.styled";
 
 export const LoginPage = styled.div`
-  display: none;
   width: 100%;
   height: 100%;
   min-width: 320px;
@@ -50,7 +49,7 @@ export const PopExitFormGroup = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
 `;
 
 export const PopExitButton = styled.button``;
@@ -109,4 +108,19 @@ export const PopExitButtonNo = styled(PopExitButton)`
   }
 
   ${Hover03}
+`;
+
+export const LoginPageInput = styled.div`
+  width: 248px;
+  gap: 7px;
+  opacity: 0px;
+`;
+export const Login = styled.input`
+  width: 120px;
+  height: 21px;
+  padding: 8px 10px 8px 10px;
+  gap: 10px;
+  border-radius: 8px;
+  border: none;
+  opacity: 0px;
 `;

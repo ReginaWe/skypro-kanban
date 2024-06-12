@@ -36,6 +36,13 @@ export const CardBtn = styled.div`
   align-items: center;
   justify-content: space-around;
   padding: 2px;
+
+  &  div {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: #94A6BE;
+  }
 `;
 
 export const CardContent = styled.div`

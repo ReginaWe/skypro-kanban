@@ -1,20 +1,32 @@
+import { Link, useNavigate } from "react-router-dom";
+import { AppRoutes } from "../../../App";
 import * as S from "./PopExit.styled"
 
-const PopExit = () => {
+const PopExit = ({ setIsAuth }) => {
+  const navigate = useNavigate()
+
+  function handleLogOut() {
+    setIsAuth(false)
+    navigate(AppRoutes.MAIN)
+  }
+
   return (
     <S.PopExit>
       <S.PopExitContainer>
         <S.PopExitBlock>
           <S.PopExitTtl>
-            <h2>Выйти из аккаунта?</h2> {/* !!! */}
+            <h2>Выйти из аккаунта?</h2>
           </S.PopExitTtl>
           <form className="pop-exit__form" id="formExit" action="#">
             <S.PopExitFormGroup>
-              <S.PopExitButtonYes id="exitYes">
-                <a href="modal/signin.html">Да, выйти</a>{" "}
+              <S.PopExitButtonYes id="exitYes" onClick={handleLogOut}>
+                Да, выйти
               </S.PopExitButtonYes>
+              {/* <S.PopExitButtonYes id="exitYes" onClick={() => setIsAuth(false)}>
+                <Link to={AppRoutes.MAIN}>Да, выйти</Link>
+              </S.PopExitButtonYes> */}
               <S.PopExitButtonNo id="exitNo">
-                <a href="main.html">Нет, остаться</a>{" "}
+                <Link to={AppRoutes.MAIN}>Нет, остаться</Link>
               </S.PopExitButtonNo>
             </S.PopExitFormGroup>
           </form>
