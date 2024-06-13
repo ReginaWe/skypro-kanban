@@ -1,13 +1,12 @@
 import styled, { createGlobalStyle } from "styled-components";
 
-
 export const Wrapper = styled.div`
-max-width: 100%;
+  max-width: 100%;
   width: 100vw;
   min-height: 100vh;
   overflow: hidden;
   background-color: ${({ theme }) => theme.body};
-`
+`;
 
 export const GlobalStyle = createGlobalStyle`
 * {
@@ -45,4 +44,3 @@ body {
     color: ${({ theme }) => theme.text};
 }
 `;
-

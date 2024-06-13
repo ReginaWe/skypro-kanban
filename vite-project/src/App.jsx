@@ -19,7 +19,7 @@ export const AppRoutes = {
 function App() {
   /*  const isAuth = true; */
 
-  const [isAuth, setIsAuth] = useState(true);
+  const [isAuth, setIsAuth] = useState(false);
 
 /*   const navigate = useNavigate(); */
 

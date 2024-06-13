@@ -1,50 +1,44 @@
-const RegisterPage = () => {
+import { Link, useNavigate } from "react-router-dom";
+import * as S from "./Modal.styled";
+import { AppRoutes } from "../../App";
+
+const RegisterPage = ({ setIsAuth }) => {
+
+  const navigate = useNavigate();
+
+  function handleRegister() {
+    setIsAuth(true);
+    navigate(AppRoutes.MAIN);
+  }
   return (
-    <div className="wrapper">
-      <div className="container-signup">
-        <div className="modal">
-          <div className="modal__block">
-            <div className="modal__ttl">
-              <h2>Регистрация</h2>
-            </div>
-            <form className="modal__form-login" id="formLogUp" action="#">
-              <input
-                className="modal__input first-name"
-                type="text"
-                name="first-name"
-                id="first-name"
-                placeholder="Имя"
-              />
-              <input
-                className="modal__input login"
-                type="text"
-                name="login"
-                id="loginReg"
-                placeholder="Эл. почта"
-              />
-              <input
-                className="modal__input password-first"
-                type="password"
-                name="password"
-                id="passwordFirst"
-                placeholder="Пароль"
-              />
-              <button
-                className="modal__btn-signup-ent _hover01"
-                id="SignUpEnter"
-              >
-                <a href="../main.html">Зарегистрироваться</a>{" "}
-              </button>
-              <div className="modal__form-group">
-                <p>
-                  Уже есть аккаунт? <a href="signin.html">Войдите здесь</a>
-                </p>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
+    <>
+      <S.ModalGlobalStyle />
+      <S.ModalWrapper>
+        <S.ModalContainer>
+          <S.Modal>
+            <S.ModalBlock>
+              <S.ModalTitle>
+                <h2>Регистрация</h2>
+              </S.ModalTitle>
+              <S.ModalForm>
+                <S.ModalInput placeholder="Имя" />
+                <S.ModalInput placeholder="Эл. почта" />
+                <S.ModalInput placeholder="Пароль" />
+                <S.ModalButton onClick={handleRegister}>
+                  <Link to={AppRoutes.MAIN}>Зарегистрироваться</Link>
+                </S.ModalButton>
+                <S.ModalFormGroup>
+                  <p>
+                    Уже есть аккаунт?
+                    <Link to={AppRoutes.LOGIN}>Войдите здесь</Link>
+                  </p>
+                </S.ModalFormGroup>
+              </S.ModalForm>
+            </S.ModalBlock>
+          </S.Modal>
+        </S.ModalContainer>
+      </S.ModalWrapper>
+    </>
   );
 };
 
