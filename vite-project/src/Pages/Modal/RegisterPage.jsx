@@ -1,14 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
 import * as S from "./Modal.styled";
-import { AppRoutes } from "../../App";
+import { routePaths } from "../../AppRoutes";
 
 const RegisterPage = ({ setIsAuth }) => {
-
   const navigate = useNavigate();
 
   function handleRegister() {
     setIsAuth(true);
-    navigate(AppRoutes.MAIN);
+    navigate(routePaths.MAIN);
   }
   return (
     <>
@@ -25,12 +24,12 @@ const RegisterPage = ({ setIsAuth }) => {
                 <S.ModalInput placeholder="Эл. почта" />
                 <S.ModalInput placeholder="Пароль" />
                 <S.ModalButton onClick={handleRegister}>
-                  <Link to={AppRoutes.MAIN}>Зарегистрироваться</Link>
+                  <Link to={routePaths.MAIN}>Зарегистрироваться</Link>
                 </S.ModalButton>
                 <S.ModalFormGroup>
                   <p>
                     Уже есть аккаунт?
-                    <Link to={AppRoutes.LOGIN}>Войдите здесь</Link>
+                    <Link to={routePaths.LOGIN}>Войдите здесь</Link>
                   </p>
                 </S.ModalFormGroup>
               </S.ModalForm>

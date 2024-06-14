@@ -1,13 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
-import { AppRoutes } from "../../../App";
-import * as S from "./PopExit.styled"
+import { routePaths } from "../../../AppRoutes";
+import * as S from "./PopExit.styled";
 
 const PopExit = ({ setIsAuth }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   function handleLogOut() {
-    setIsAuth(false)
-    navigate(AppRoutes.MAIN)
+    setIsAuth(false);
+    navigate(routePaths.MAIN);
   }
 
   return (
@@ -23,10 +23,10 @@ const PopExit = ({ setIsAuth }) => {
                 Да, выйти
               </S.PopExitButtonYes>
               {/* <S.PopExitButtonYes id="exitYes" onClick={() => setIsAuth(false)}>
-                <Link to={AppRoutes.MAIN}>Да, выйти</Link>
+                <Link to={routePathss.MAIN}>Да, выйти</Link>
               </S.PopExitButtonYes> */}
               <S.PopExitButtonNo id="exitNo">
-                <Link to={AppRoutes.MAIN}>Нет, остаться</Link>
+                <Link to={routePaths.MAIN}>Нет, остаться</Link>
               </S.PopExitButtonNo>
             </S.PopExitFormGroup>
           </form>

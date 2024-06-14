@@ -33,6 +33,7 @@ body {
   width: 100%;
   height: 100%;
   font-family: "Roboto", sans-serif;
+  color: ${({ theme }) => theme.text};
 }
 
 div,
@@ -47,15 +48,13 @@ export const ModalWrapper = styled.div`
   height: 100%;
   overflow-x: hidden;
   overflow-y: scroll;
-  background-color: #eaeef6;
+  background-color: ${({ theme }) => theme.body};
 `;
 export const ModalContainer = styled.div`
   /* display: block; */
   width: 100vw;
   min-height: 100vh;
   margin: 0 auto;
-
-  ${Hover01}
 `;
 export const Modal = styled.div`
   width: 100%;
@@ -71,7 +70,7 @@ export const Modal = styled.div`
 export const ModalBlock = styled.div`
   display: block;
   margin: 0 auto;
-  background-color: #ffffff;
+  background-color: ${({ theme }) => theme.back};
   max-width: 368px;
   width: 100%;
   padding: 50px 60px;
@@ -93,8 +92,9 @@ export const ModalForm = styled.form`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  //gap: 7px;
 
-  & input:first-child {
+  & input:not(:last-child) {
     margin-bottom: 7px;
   }
 `;
@@ -168,4 +168,3 @@ export const ModalFormGroup = styled.div`
     text-decoration: underline;
   }
 `;
-

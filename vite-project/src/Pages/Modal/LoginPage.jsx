@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { AppRoutes } from "../../App";
+import { routePaths } from "../../AppRoutes";
 import * as S from "./Modal.styled";
 
 /* import { ThemeProvider } from "styled-components";
@@ -11,7 +11,7 @@ const LoginPage = ({ setIsAuth }) => {
 
   function handleLogIn() {
     setIsAuth(true);
-    navigate(AppRoutes.MAIN);
+    navigate(routePaths.MAIN);
   }
   /*  const [theme, setTheme] = useState("light"); */
 
@@ -32,7 +32,7 @@ const LoginPage = ({ setIsAuth }) => {
                 <S.ModalButton onClick={handleLogIn}>Войти</S.ModalButton>
                 <S.ModalFormGroup>
                   <p>Нужно зарегистрироваться?</p>
-                  <Link to={AppRoutes.REGISTER}>Регистрируйтесь здесь</Link>
+                  <Link to={routePaths.REGISTER}>Регистрируйтесь здесь</Link>
                 </S.ModalFormGroup>
               </S.ModalForm>
             </S.ModalBlock>
