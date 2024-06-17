@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../../App.css";
 import Header from "../../components/Header/Header";
 import Main from "../../components/Main/Main";
 import { cardList } from "../../data";
 import { Wrapper } from "../../global.styled";
 import { Outlet } from "react-router-dom";
+import { getTodos } from "../../api";
 
 function MainPage({ theme, setTheme }) {
   const [cards, setCards] = useState(cardList);
@@ -14,12 +15,15 @@ function MainPage({ theme, setTheme }) {
     else setTheme("light");
   }
 
+  useEffect(() => {
+    getTodos().then((tasks) => {
+      console.log(tasks);
+      setCards(cards)
+    });
+  });
+
   return (
     <Wrapper>
-      {/* <!-- pop-up start--> */} {/* Alt + Shift + A */}
-      {/* <PopExit />
-      <PopNewCard />
-      <PopBrowse /> */}
       <Outlet />
       <Header
         toggleTheme={toggleTheme}

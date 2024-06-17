@@ -18,7 +18,7 @@ export const routePaths = {
 };
 
 function AppRoutes({ theme, setTheme }) {
-  const [isAuth, setIsAuth] = useState(false);
+  const [isAuth, setIsAuth] = useState(true);
 
   return (
     <Routes>
