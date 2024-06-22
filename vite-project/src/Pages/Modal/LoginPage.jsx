@@ -13,7 +13,7 @@ const LoginPage = ({ setIsAuth }) => {
   }
 
   const [formValues, setFormValues] = useState({
-    email: "",
+    login: "",
     password: "",
   });
   const [error, setError] = useState(null);
@@ -23,21 +23,21 @@ const LoginPage = ({ setIsAuth }) => {
     setFormValues({ ...formValues, [name]: value });
   };
 
-  const onRegister = async (event) => {
+  const onLogin = async (event) => {
     event.preventDefault();
-    if (!formValues.email) {
-      setError("Не введена почта");
+    if (!formValues.login || formValues.login.trim().length === 0) {
+      setError("Не введен логин");
       return;
     }
 
-    if (!formValues.password) {
+    if (!formValues.password || formValues.password.trim().length === 0) {
       setError("Не введен пароль");
       return;
     }
 
     try {
       const response = await login({
-        login: formValues.email,
+        login: formValues.login,
         password: formValues.password,
       });
 
@@ -46,7 +46,9 @@ const LoginPage = ({ setIsAuth }) => {
       console.error(error.message);
       if (error.message === "Failed to fetch") {
         setError("Ошибка соединения");
+        return;
       }
+      setError(error.message);
     }
   };
 
@@ -60,20 +62,24 @@ const LoginPage = ({ setIsAuth }) => {
               <S.ModalTitle>
                 <h2>Вход</h2>
               </S.ModalTitle>
-              <S.ModalForm onSubmit={onRegister}>
+              <S.ModalForm onSubmit={onLogin}>
                 <S.ModalInput
                   placeholder="Эл. почта"
+                  name="login"
+                  type="login"
                   value={formValues.email}
                   onChange={onInputChange}
                 />
                 <S.ModalInput
                   placeholder="Пароль"
+                  name="password"
+                  type="password"
                   value={formValues.password}
                   onChange={onInputChange}
                 />
                 <br />
                 {error && <p>{error}</p>}
-                <S.ModalButton onClick={handleLogIn}>Войти</S.ModalButton>
+                <S.ModalButton onClick={handleLogIn} type="submit">Войти</S.ModalButton>
                 <S.ModalFormGroup>
                   <p>Нужно зарегистрироваться?</p>
                   <Link to={routePaths.REGISTER}>Регистрируйтесь здесь</Link>

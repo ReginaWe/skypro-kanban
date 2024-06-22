@@ -7,8 +7,11 @@ import { Wrapper } from "../../global.styled";
 import { Outlet } from "react-router-dom";
 import { getTodos } from "../../api";
 
-function MainPage({ theme, setTheme }) {
+function MainPage({ theme, setTheme, user }) {
   const [cards, setCards] = useState(cardList);
+  const [isLoading, setLoading] = useState(true);
+  const [error, setError] = useState(null)
+  
 
   function toggleTheme() {
     if (theme === "light") setTheme("dark");
@@ -16,11 +19,21 @@ function MainPage({ theme, setTheme }) {
   }
 
   useEffect(() => {
-    getTodos().then((tasks) => {
-      console.log(tasks);
-      setCards(cards)
-    });
-  });
+    const fetchData = async () => {
+      try {
+        const response = await getTodos({
+          token: user.token,
+        })
+        setCards(response.tasks)
+      } catch (error) {
+        console.error(error)
+        setError("Ошибка при получении задач")
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchData()
+  }, [user.token]);
 
   return (
     <Wrapper>
@@ -31,7 +44,8 @@ function MainPage({ theme, setTheme }) {
         setCards={setCards}
         cards={cards}
       />
-      <Main cardList={cards} />
+      {error && <p>{error}</p>}
+      {!error && <Main cardList={cards} isLoading={isLoading} />}
     </Wrapper>
   );
 }
