@@ -4,13 +4,8 @@ import * as S from "./Modal.styled";
 import { useState } from "react";
 import { login } from "../../api";
 
-const LoginPage = ({ setIsAuth }) => {
+const LoginPage = ({ setUser }) => {
   const navigate = useNavigate();
-
-  function handleLogIn() {
-    setIsAuth(true);
-    navigate(routePaths.MAIN);
-  }
 
   const [formValues, setFormValues] = useState({
     login: "",
@@ -40,10 +35,13 @@ const LoginPage = ({ setIsAuth }) => {
         login: formValues.login,
         password: formValues.password,
       });
+      setUser(response);
+      navigate(routePaths.MAIN);
 
       console.log("LOGIN RESPONSE", response);
     } catch (error) {
       console.error(error.message);
+
       if (error.message === "Failed to fetch") {
         setError("Ошибка соединения");
         return;
@@ -64,13 +62,15 @@ const LoginPage = ({ setIsAuth }) => {
               </S.ModalTitle>
               <S.ModalForm onSubmit={onLogin}>
                 <S.ModalInput
+                  $active={error}
                   placeholder="Эл. почта"
                   name="login"
-                  type="login"
+                  type="email"
                   value={formValues.email}
                   onChange={onInputChange}
                 />
                 <S.ModalInput
+                  $active={error}
                   placeholder="Пароль"
                   name="password"
                   type="password"
@@ -79,7 +79,9 @@ const LoginPage = ({ setIsAuth }) => {
                 />
                 <br />
                 {error && <p>{error}</p>}
-                <S.ModalButton onClick={handleLogIn} type="submit">Войти</S.ModalButton>
+                <S.ModalButton onClick={onLogin} type="submit">
+                  Войти
+                </S.ModalButton>
                 <S.ModalFormGroup>
                   <p>Нужно зарегистрироваться?</p>
                   <Link to={routePaths.REGISTER}>Регистрируйтесь здесь</Link>

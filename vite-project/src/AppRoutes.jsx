@@ -18,26 +18,26 @@ export const routePaths = {
 };
 
 function AppRoutes({ theme, setTheme }) {
-  const [isAuth, setIsAuth] = useState(true);
+  const [user, setUser] = useState(null);
 
   return (
     <Routes>
-      <Route element={<PrivateRoute isAuth={isAuth} />}>
-        <Route path={routePaths.MAIN} element={<MainPage theme={theme} setTheme={setTheme} />}>
+      <Route element={<PrivateRoute user={user} />}>
+        <Route path={routePaths.MAIN} element={<MainPage theme={theme} setTheme={setTheme} user={user}/>}>
           <Route path={routePaths.CARD} element={<CardPage />} />
           <Route
             path={routePaths.EXIT}
-            element={<ExitPage setIsAuth={setIsAuth} />}
+            element={<ExitPage setUser={setUser} />}
           />
         </Route>
       </Route>
       <Route
         path={routePaths.LOGIN}
-        element={<LoginPage setIsAuth={setIsAuth} />}
+        element={<LoginPage setUser={setUser} />}
       />
       <Route
         path={routePaths.REGISTER}
-        element={<RegisterPage setIsAuth={setIsAuth} />}
+        element={<RegisterPage setUser={setUser} />}
       />
       <Route path={routePaths.NOT_FOUND} element={<NotFoundPage />} />
     </Routes>

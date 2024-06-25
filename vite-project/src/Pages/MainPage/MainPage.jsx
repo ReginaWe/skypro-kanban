@@ -22,7 +22,7 @@ function MainPage({ theme, setTheme, user }) {
     const fetchData = async () => {
       try {
         const response = await getTodos({
-          token: user.token,
+          token: user.user.token,
         })
         setCards(response.tasks)
       } catch (error) {
@@ -33,7 +33,7 @@ function MainPage({ theme, setTheme, user }) {
       }
     }
     fetchData()
-  }, [user.token]);
+  }, [user]);
 
   return (
     <Wrapper>
