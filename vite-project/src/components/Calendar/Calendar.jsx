@@ -1,5 +1,11 @@
 import * as S from "./Calendar.styled";
-import { CalendarDayName, CalendarDaysNames, CalendsrCells, NavActions } from "../shared.styled";
+import {
+  CalendarDayName,
+  CalendarDaysNames,
+  CalendsrCells,
+  NavActions,
+} from  "../../lib/shared.styled";
+
 
 const Calendar = () => {
   return (

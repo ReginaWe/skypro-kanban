@@ -3,8 +3,10 @@ import { routePaths } from "../../AppRoutes";
 import * as S from "./Modal.styled";
 import { useState } from "react";
 import { login } from "../../api";
+import { useUser } from "../../hooks/useUser";
 
-const LoginPage = ({ setUser }) => {
+const LoginPage = () => {
+  const { setLogin } = useUser()
   const navigate = useNavigate();
 
   const [formValues, setFormValues] = useState({
@@ -35,7 +37,7 @@ const LoginPage = ({ setUser }) => {
         login: formValues.login,
         password: formValues.password,
       });
-      setUser(response);
+      setLogin(response);
       navigate(routePaths.MAIN);
 
       console.log("LOGIN RESPONSE", response);

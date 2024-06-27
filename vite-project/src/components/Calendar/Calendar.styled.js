@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { SubTitle } from "../shared.styled";
+import { SubTitle } from "../../lib/shared.styled";
 
 export const CalendarBlock = styled.div`
   display: block;

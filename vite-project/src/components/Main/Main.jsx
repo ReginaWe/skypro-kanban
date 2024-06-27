@@ -1,6 +1,6 @@
 import Column from "../Column/Column";
 import * as S from "./Main.styled";
-import { Container } from "../shared.styled";
+import { Container } from "../../lib/shared.styled";
 
 const statusList = [
   "Без статуса",

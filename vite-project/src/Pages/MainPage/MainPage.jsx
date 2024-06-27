@@ -6,11 +6,13 @@ import { cardList } from "../../data";
 import { Wrapper } from "../../global.styled";
 import { Outlet } from "react-router-dom";
 import { getTodos } from "../../api";
+import { useUser } from "../../hooks/useUser";
 
-function MainPage({ theme, setTheme, user }) {
+function MainPage({ theme, setTheme }) {
   const [cards, setCards] = useState(cardList);
   const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState(null)
+  const { user } = useUser()
   
 
   function toggleTheme() {

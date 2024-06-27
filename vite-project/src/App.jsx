@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./global.styled";
-import { darkTheme, lightTheme } from "./components/Themes";
+import { darkTheme, lightTheme } from "./lib/Themes";
 import AppRoutes from "./AppRoutes";
+
 
 
 function App() {

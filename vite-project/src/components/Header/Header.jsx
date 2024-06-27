@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Container } from "../shared.styled";
+import { Container } from "../../lib/shared.styled";
 import * as S from "./Header.styled";
 import { Link } from "react-router-dom";
 
@@ -29,7 +29,10 @@ const Header = ({ toggleTheme, theme, setCards, cards }) => {
         <S.HeaderBlock>
           <S.HeaderLogo>
             <a href="" target="_self">
-              <img src={`/images/logo${theme === "dark" ? "_dark" : ""}.png`} alt="logo" />
+              <img
+                src={`/images/logo${theme === "dark" ? "_dark" : ""}.png`}
+                alt="logo"
+              />
             </a>
             {/* <a href="" target="_self">
               <img src="images/logo.png" alt="logo" />
@@ -51,7 +54,7 @@ const Header = ({ toggleTheme, theme, setCards, cards }) => {
                 <S.PopUserSetMail>ivan.ivanov@gmail.com</S.PopUserSetMail>
                 <S.PopUserSetTheme>
                   <p>Темная тема</p>
-                  <input
+                  <S.Checkbox
                     type="checkbox"
                     className="checkbox"
                     name="checkbox"

@@ -23,22 +23,13 @@ function AppRoutes({ theme, setTheme }) {
   return (
     <Routes>
       <Route element={<PrivateRoute user={user} />}>
-        <Route path={routePaths.MAIN} element={<MainPage theme={theme} setTheme={setTheme} user={user}/>}>
+        <Route path={routePaths.MAIN} element={<MainPage theme={theme} setTheme={setTheme} />}>
           <Route path={routePaths.CARD} element={<CardPage />} />
-          <Route
-            path={routePaths.EXIT}
-            element={<ExitPage setUser={setUser} />}
-          />
+          <Route path={routePaths.EXIT} element={<ExitPage setUser={setUser} />}/>
         </Route>
       </Route>
-      <Route
-        path={routePaths.LOGIN}
-        element={<LoginPage setUser={setUser} />}
-      />
-      <Route
-        path={routePaths.REGISTER}
-        element={<RegisterPage setUser={setUser} />}
-      />
+      <Route path={routePaths.LOGIN} element={<LoginPage setUser={setUser} />}/>
+      <Route path={routePaths.REGISTER} element={<RegisterPage setUser={setUser} />}/>
       <Route path={routePaths.NOT_FOUND} element={<NotFoundPage />} />
     </Routes>
   );

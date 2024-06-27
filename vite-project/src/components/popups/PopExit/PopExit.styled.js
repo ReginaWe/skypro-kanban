@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { Hover01, Hover03 } from "../../shared.styled";
+import { Hover01, Hover03 } from "../../../lib/shared.styled";
+
 
 export const PopExit = styled.div`
   width: 100%;

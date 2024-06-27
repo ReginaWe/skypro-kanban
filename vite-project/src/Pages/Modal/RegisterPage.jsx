@@ -3,8 +3,10 @@ import * as S from "./Modal.styled";
 import { routePaths } from "../../AppRoutes";
 import { useState } from "react";
 import { register } from "../../api";
+import { useUser } from "../../hooks/useUser";
 
-const RegisterPage = ({ setUser }) => {
+const RegisterPage = () => {
+  const { setUser } = useUser();
   const navigate = useNavigate();
 
   async function handleRegister(event) {
@@ -30,8 +32,8 @@ const RegisterPage = ({ setUser }) => {
         login: formValues.login,
         password: formValues.password,
       });
-      setUser(response)
-      navigate(routePaths.MAIN)
+      setUser(response);
+      navigate(routePaths.MAIN);
 
       console.log("LOGIN RESPONSE", response);
     } catch (error) {
@@ -39,8 +41,10 @@ const RegisterPage = ({ setUser }) => {
       if (error.message === "Failed to fetch") {
         setError("Ошибка соединения");
         return;
+      } else {
+        setError(error.message);
+        return;
       }
-      setError(error.message);
     }
   }
 
@@ -66,13 +70,31 @@ const RegisterPage = ({ setUser }) => {
                 <h2>Регистрация</h2>
               </S.ModalTitle>
               <S.ModalForm>
-                <S.ModalInput placeholder="Имя" onChange={onInputChange} value={formValues.name} name="name" type="text"/>
-                <S.ModalInput placeholder="Эл. почта" onChange={onInputChange} value={formValues.login} name="login" type="email"/>
-                <S.ModalInput placeholder="Пароль" onChange={onInputChange} value={formValues.password} name="password" type="password"/>
+                <S.ModalInput
+                  placeholder="Имя"
+                  onChange={onInputChange}
+                  value={formValues.name}
+                  name="name"
+                  type="text"
+                />
+                <S.ModalInput
+                  placeholder="Эл. почта"
+                  onChange={onInputChange}
+                  value={formValues.login}
+                  name="login"
+                  type="email"
+                />
+                <S.ModalInput
+                  placeholder="Пароль"
+                  onChange={onInputChange}
+                  value={formValues.password}
+                  name="password"
+                  type="password"
+                />
                 <br />
                 {error && <p>{error}</p>}
                 <S.ModalButton onClick={handleRegister}>
-                  <Link to={routePaths.MAIN}>Зарегистрироваться</Link>
+                  Зарегистрироваться
                 </S.ModalButton>
                 <S.ModalFormGroup>
                   <p>

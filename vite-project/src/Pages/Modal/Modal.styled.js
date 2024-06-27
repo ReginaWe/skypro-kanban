@@ -1,5 +1,5 @@
 import styled, { createGlobalStyle } from "styled-components";
-import { Hover01 } from "../../components/shared.styled";
+import { Hover01 } from "../../lib/shared.styled";
 
 export const ModalGlobalStyle = createGlobalStyle`
 * {
@@ -102,7 +102,8 @@ export const ModalInput = styled.input`
   width: 100%;
   min-width: 100%;
   border-radius: 8px;
-  border: ${(props) => props.$active ? `0.7px solid red` : `0.7px solid rgba(148, 166, 190, 0.4)`};
+  border: ${(props) =>
+    props.$active ? `0.7px solid red` : `0.7px solid rgba(148, 166, 190, 0.4)`};
   outline: none;
   padding: 10px 8px;
 
