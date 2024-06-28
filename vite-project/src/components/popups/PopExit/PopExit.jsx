@@ -7,7 +7,7 @@ const PopExit = ({ setUser }) => {
 
   function handleLogOut() {
     setUser(null);
-    navigate(routePaths.MAIN);
+    navigate(routePaths.LOGIN);
   }
 
   return (
