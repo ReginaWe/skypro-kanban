@@ -17,8 +17,19 @@ export const routePaths = {
   NOT_FOUND: "*",
 };
 
+function getLocalStorage() {
+  let userLocal = ''
+try {
+  userLocal = JSON.parse(localStorage.getItem('user'))
+  return userLocal
+}
+catch (err) {
+  return ''
+}
+}
+
 function AppRoutes({ theme, setTheme }) {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(getLocalStorage);
 
   return (
     <Routes>

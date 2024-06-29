@@ -6,7 +6,8 @@ const PopExit = ({ setUser }) => {
   const navigate = useNavigate();
 
   function handleLogOut() {
-    setUser(null);
+    setUser("");
+    localStorage.clear();
     navigate(routePaths.LOGIN);
   }
 
