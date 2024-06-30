@@ -1,13 +1,14 @@
 import * as S from "./Calendar.styled";
 import {
-  CalendarDayName,
+  /* CalendarDayName,
   CalendarDaysNames,
-  CalendsrCells,
+  CalendsrCells, */
   NavActions,
 } from  "../../lib/shared.styled";
+import { DayPicker } from "react-day-picker"
 
 
-const Calendar = () => {
+const Calendar = ({ selected, setSelected }) => {
   return (
     <S.Calendar>
       <S.CalendarTitle>Даты</S.CalendarTitle>
@@ -38,7 +39,7 @@ const Calendar = () => {
           </NavActions>
         </S.CalendarNav>
         <S.CalendarContent>
-          <CalendarDaysNames>
+          {/* <CalendarDaysNames>
             <CalendarDayName>пн</CalendarDayName>
             <CalendarDayName>вт</CalendarDayName>
             <CalendarDayName>ср</CalendarDayName>
@@ -85,7 +86,8 @@ const Calendar = () => {
             <div className="calendar__cell _cell-day">29</div>
             <div className="calendar__cell _cell-day _weekend">30</div>
             <div className="calendar__cell _other-month _weekend">1</div>
-          </CalendsrCells>
+          </CalendsrCells> */}
+          <DayPicker mode="single" selected={selected} onSelect={setSelected}/>
         </S.CalendarContent>
 
         <input type="hidden" id="datepick_value" value="08.09.2023" />

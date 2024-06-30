@@ -1,6 +1,42 @@
+import { useState } from "react";
 import Calendar from "../../Calendar/Calendar";
+import { routePaths } from "../../../AppRoutes";
+import { useUser } from "../../../hooks/useUser";
+import { useNavigate } from "react-router-dom";
 
 const PopNewCard = () => {
+  const { user } = useUser();
+  const [selected, setSelected] = useState();
+
+  const navigate = useNavigate();
+
+  const [task, setTask] = useState({
+    title: "",
+    topic: "Research",
+    status: "Без статуса",
+    description: "",
+    date: null,
+  });
+
+  const [error, setError] = useState(null);
+
+  const createTask = (e) => {
+    e.preventDefault;
+
+    if (!task.title || !task.description || !task.date) {
+      setError("Пожалуйста, заполните все поля");
+      return;
+    }
+
+    addTask({ task, token: user.user.token })
+      .then((response) => {
+        setTasks(response.tasks); //Из хука, создать хук
+        navigate(routePaths.MAIN);
+      })
+      .catch((err) => {
+        setError("Что-то пошло не так, попробуйте еще раз");
+      });
+  };
   return (
     <div className="pop-new-card" id="popNewCard">
       <div className="pop-new-card__container">
@@ -41,7 +77,7 @@ const PopNewCard = () => {
                   ></textarea>
                 </div>
               </form>
-              <Calendar />
+              <Calendar selected={selected} setSelected={setSelected} />
             </div>
             <div className="pop-new-card__categories categories">
               <p className="categories__p subttl">Категория</p>
@@ -57,7 +93,12 @@ const PopNewCard = () => {
                 </div>
               </div>
             </div>
-            <button className="form-new__create _hover01" id="btnCreate">
+            {error && <p>{error}</p>}
+            <button
+              onClick={createTask}
+              className="form-new__create _hover01"
+              id="btnCreate"
+            >
               Создать задачу
             </button>
           </div>

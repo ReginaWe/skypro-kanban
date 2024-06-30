@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Hover01, Hover02, Hover03 } from "../../lib/shared.styled";
+import { Link } from "react-router-dom";
 
 
 export const Header = styled.header`
@@ -56,7 +57,7 @@ export const HeaderLogo = styled.div`
   width: 85px;
 `;
 
-export const HeaderButtonMainNew = styled.button`
+export const HeaderButtonMainNew = styled(Link)`
   width: 178px;
   height: 30px;
   border-radius: 4px;

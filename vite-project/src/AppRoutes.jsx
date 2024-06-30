@@ -15,6 +15,7 @@ export const routePaths = {
   LOGIN: "/login",
   REGISTER: "/register",
   NOT_FOUND: "*",
+  ADD_TASK: "/task",
 };
 
 function getLocalStorage() {
@@ -37,10 +38,11 @@ function AppRoutes({ theme, setTheme }) {
         <Route path={routePaths.MAIN} element={<MainPage theme={theme} setTheme={setTheme} />}>
           <Route path={routePaths.CARD} element={<CardPage />} />
           <Route path={routePaths.EXIT} element={<ExitPage setUser={setUser} />}/>
+          <Route path={routePaths.ADD_TASK} element={<AddTaskPage />} />
         </Route>
       </Route>
-      <Route path={routePaths.LOGIN} element={<LoginPage setUser={setUser} />}/>
-      <Route path={routePaths.REGISTER} element={<RegisterPage setUser={setUser} />}/>
+      <Route path={routePaths.LOGIN} element={<LoginPage /* setUser={setUser} */ />}/>
+      <Route path={routePaths.REGISTER} element={<RegisterPage /* setUser={setUser} */ />}/>
       <Route path={routePaths.NOT_FOUND} element={<NotFoundPage />} />
     </Routes>
   );

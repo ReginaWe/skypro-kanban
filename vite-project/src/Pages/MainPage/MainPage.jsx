@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import "../../App.css";
 import Header from "../../components/Header/Header";
 import Main from "../../components/Main/Main";
-import { cardList } from "../../data";
 import { Wrapper } from "../../global.styled";
 import { Outlet } from "react-router-dom";
 import { getTodos } from "../../api";
 import { useUser } from "../../hooks/useUser";
+import { useTasks } from "../../hooks/useTasks";
 
 function MainPage({ theme, setTheme }) {
-  const [cards, setCards] = useState(cardList);
+  const {cards, setCards} = useTasks();
   const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState(null)
   const { user } = useUser()

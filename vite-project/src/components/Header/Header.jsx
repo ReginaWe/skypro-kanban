@@ -2,15 +2,18 @@ import { useState } from "react";
 import { Container } from "../../lib/shared.styled";
 import * as S from "./Header.styled";
 import { Link } from "react-router-dom";
+import { useUser } from "../../hooks/useUser";
+import { routePaths } from "../../AppRoutes";
 
-const Header = ({ toggleTheme, theme, setCards, cards }) => {
+const Header = ({ toggleTheme, theme, /* setCards, cards */ }) => {
+  const { user } = useUser()
   const [isOpen, setOpen] = useState(false);
 
   const handleOpen = () => {
     setOpen((prev) => !prev);
   };
 
-  const onAddCard = () => {
+  /* const onAddCard = () => {
     console.log("Добавить карточку");
     const newCards = {
       id: Date.now(),
@@ -21,7 +24,7 @@ const Header = ({ toggleTheme, theme, setCards, cards }) => {
     };
     const newCardList = [...cards, newCards];
     setCards(newCardList);
-  };
+  }; */
 
   return (
     <S.Header>
@@ -34,24 +37,16 @@ const Header = ({ toggleTheme, theme, setCards, cards }) => {
                 alt="logo"
               />
             </a>
-            {/* <a href="" target="_self">
-              <img src="images/logo.png" alt="logo" />
-            </a> */}
           </S.HeaderLogo>
-          {/* <S.HeaderLogo>
-            <a href="" target="_self">
-              <img src="images/logo_dark.png" alt="logo" />
-            </a>
-          </S.HeaderLogo> */}
           <S.HeaderNav>
-            <S.HeaderButtonMainNew onClick={onAddCard}>
-              <a href="#popNewCard">Создать новую задачу</a>
+            <S.HeaderButtonMainNew to={routePaths.ADD_TASK}>
+              Создать новую задачу
             </S.HeaderButtonMainNew>
-            <S.HeaderUser onClick={handleOpen}>Ivan Ivanov</S.HeaderUser>
+            <S.HeaderUser onClick={handleOpen}>{user.user.name}</S.HeaderUser>
             {isOpen && (
               <S.HeaderPopUserSet>
-                <S.PopUserSetName>Ivan Ivanov</S.PopUserSetName>
-                <S.PopUserSetMail>ivan.ivanov@gmail.com</S.PopUserSetMail>
+                <S.PopUserSetName>{user.user.name}</S.PopUserSetName>
+                <S.PopUserSetMail>{user.user.login}</S.PopUserSetMail>
                 <S.PopUserSetTheme>
                   <p>Темная тема</p>
                   <S.Checkbox

@@ -7,7 +7,7 @@ const PopExit = ({ setUser }) => {
 
   function handleLogOut() {
     setUser("");
-    localStorage.clear();
+    localStorage.removeItem("user")
     navigate(routePaths.LOGIN);
   }
 
