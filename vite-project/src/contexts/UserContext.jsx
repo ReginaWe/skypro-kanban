@@ -1,4 +1,6 @@
 import { createContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { routePaths } from "../AppRoutes";
 
 export const UserContext = createContext(null);
 
@@ -9,10 +11,13 @@ const getUserFromLocalStorage = () => {
 
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState(getUserFromLocalStorage());
+  const navigate = useNavigate();
+
 
   const logout = () => {
     setUser(null);
     localStorage.removeItem("user");
+    navigate(routePaths.LOGIN);
   };
 
   const setLogin = (newUser) => {
@@ -20,8 +25,14 @@ const UserProvider = ({ children }) => {
     localStorage.setItem("user", JSON.stringify(newUser));
   };
 
+  const handleLogOut = () => {
+    setUser("");
+    localStorage.removeItem("user")
+    navigate(routePaths.LOGIN);
+  }
+
   return (
-    <UserContext.Provider value={{ user, logout, setLogin }}>
+    <UserContext.Provider value={{ user, logout, setLogin, handleLogOut }}>
       {children}
     </UserContext.Provider>
   );

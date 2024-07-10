@@ -4,7 +4,7 @@ import Header from "../../components/Header/Header";
 import Main from "../../components/Main/Main";
 import { Wrapper } from "../../global.styled";
 import { Outlet } from "react-router-dom";
-import { getTodos } from "../../api";
+import { getTodos } from "../../api/tasks";
 import { useUser } from "../../hooks/useUser";
 import { useTasks } from "../../hooks/useTasks";
 

@@ -1,15 +1,11 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { routePaths } from "../../../AppRoutes";
 import * as S from "./PopExit.styled";
+import { useContext } from "react";
+import { UserContext } from "../../../contexts/UserContext";
 
-const PopExit = ({ setUser }) => {
-  const navigate = useNavigate();
-
-  function handleLogOut() {
-    setUser("");
-    localStorage.removeItem("user")
-    navigate(routePaths.LOGIN);
-  }
+const PopExit = () => {
+  const { handleLogOut } = useContext(UserContext);
 
   return (
     <S.PopExit>

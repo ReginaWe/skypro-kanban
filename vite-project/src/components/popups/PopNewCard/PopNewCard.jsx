@@ -3,6 +3,7 @@ import Calendar from "../../Calendar/Calendar";
 import { routePaths } from "../../../AppRoutes";
 import { useUser } from "../../../hooks/useUser";
 import { useNavigate } from "react-router-dom";
+import { addTask } from "../../../api/tasks";
 
 const PopNewCard = () => {
   const { user } = useUser();
@@ -59,10 +60,11 @@ const PopNewCard = () => {
                   <input
                     className="form-new__input"
                     type="text"
-                    name="name"
+                    name="title"
                     id="formTitle"
                     placeholder="Введите название задачи..."
-                    autoFocus
+                    autoFocus=""
+                    onChange={(e) => setTask({ ...task, title: e.target.value })}
                   />
                 </div>
                 <div className="form-new__block">
@@ -74,6 +76,7 @@ const PopNewCard = () => {
                     name="text"
                     id="textArea"
                     placeholder="Введите описание задачи..."
+                    onChange={(e) => setTask({ ...task, description: e.target.value })}
                   ></textarea>
                 </div>
               </form>

@@ -2,11 +2,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { routePaths } from "../../AppRoutes";
 import * as S from "./Modal.styled";
 import { useState } from "react";
-import { login } from "../../api";
+import { login } from "../../api/user";
 import { useUser } from "../../hooks/useUser";
 
 const LoginPage = () => {
-  const { setLogin } = useUser()
+  const { setLogin } = useUser();
   const navigate = useNavigate();
 
   const [formValues, setFormValues] = useState({

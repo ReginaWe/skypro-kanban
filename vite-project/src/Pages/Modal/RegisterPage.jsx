@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import * as S from "./Modal.styled";
 import { routePaths } from "../../AppRoutes";
 import { useState } from "react";
-import { register } from "../../api";
+import { register } from "../../api/user";
 import { useUser } from "../../hooks/useUser";
 
 const RegisterPage = () => {
