@@ -5,10 +5,12 @@ import { useUser } from "../../../hooks/useUser";
 import { Link, useNavigate } from "react-router-dom";
 import { addTask } from "../../../api/tasks";
 import * as S from "./PopNewCard.styled";
+import { useTasks } from "../../../hooks/useTasks";
 
 const PopNewCard = () => {
   const { user } = useUser();
-  const [selected, setSelected] = useState();
+  const { setCards } = useTasks();
+  const [date, setDate] = useState(new Date());
 
   const navigate = useNavigate();
 
@@ -17,7 +19,6 @@ const PopNewCard = () => {
     topic: "Research",
     status: "Без статуса",
     description: "",
-    date: null,
   });
 
   const [error, setError] = useState(null);
@@ -25,20 +26,32 @@ const PopNewCard = () => {
   const createTask = (e) => {
     e.preventDefault;
 
+    const title = task.title || "Новая задача";
+    const topic = task.topic || "Research";
+    const newTask = {
+      ...task,
+      topic,
+      title,
+      date,
+    };
+
     if (!task.title || !task.description || !task.date) {
       setError("Пожалуйста, заполните все поля");
       return;
     }
 
-    addTask({ task, token: user.user.token })
+    addTask({ task: newTask, token: user.user.token })
       .then((response) => {
-        setTasks(response.tasks); //Из хука, создать хук
+        setCards(response.tasks);
         navigate(routePaths.MAIN);
       })
       .catch((err) => {
+        console.log(err);
         setError("Что-то пошло не так, попробуйте еще раз");
       });
   };
+
+  console.log(date);
   return (
     <S.PopNewCard>
       <S.PopNewCardContainer>
@@ -51,9 +64,7 @@ const PopNewCard = () => {
             <S.PopNewCardWrap>
               <S.PopNewCardForm>
                 <S.FormNewBlock>
-                  <S.SubTitle>
-                    Название задачи
-                  </S.SubTitle>
+                  <S.SubTitle>Название задачи</S.SubTitle>
                   <S.FormNewInput
                     type="text"
                     name="title"
@@ -66,11 +77,9 @@ const PopNewCard = () => {
                   />
                 </S.FormNewBlock>
                 <S.FormNewBlock>
-                  <S.SubTitle>
-                    Описание задачи
-                  </S.SubTitle>
+                  <S.SubTitle>Описание задачи</S.SubTitle>
                   <S.FormNewArea
-                    name="text"
+                    name="description"
                     id="textArea"
                     placeholder="Введите описание задачи..."
                     onChange={(e) =>
@@ -79,7 +88,7 @@ const PopNewCard = () => {
                   ></S.FormNewArea>
                 </S.FormNewBlock>
               </S.PopNewCardForm>
-              <Calendar selected={selected} setSelected={setSelected} />
+              <Calendar mode="single" selected={date} onSelect={setDate} />
             </S.PopNewCardWrap>
             <S.PopNewCardCategories>
               <S.Categories>Категория</S.Categories>
@@ -96,9 +105,7 @@ const PopNewCard = () => {
               </S.CategoriesThemes>
             </S.PopNewCardCategories>
             {error && <p>{error}</p>}
-            <S.FormNewCreate
-              onClick={createTask}
-            >
+            <S.FormNewCreate onClick={createTask}>
               Создать задачу
             </S.FormNewCreate>
           </S.PopNewCardContent>

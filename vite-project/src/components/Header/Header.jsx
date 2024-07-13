@@ -5,13 +5,33 @@ import { Link } from "react-router-dom";
 import { useUser } from "../../hooks/useUser";
 import { routePaths } from "../../AppRoutes";
 
+
 const Header = ({ toggleTheme, theme, /* setCards, cards */ }) => {
   const { user } = useUser()
   const [isOpen, setOpen] = useState(false);
 
+
   const handleOpen = () => {
     setOpen((prev) => !prev);
   };
+
+  /* const onAddTask = () => {
+    const newTask = {
+      title: "TEST",
+      topic: "Research",
+      date: "19.05.2024",
+      status: "Без статуса",
+      description: ""
+    }
+    addTask ({ token: user.user.token, task: newTask })
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+
+  } */
 
   /* const onAddCard = () => {
     console.log("Добавить карточку");
@@ -39,9 +59,9 @@ const Header = ({ toggleTheme, theme, /* setCards, cards */ }) => {
             </a>
           </S.HeaderLogo>
           <S.HeaderNav>
-            <S.HeaderButtonMainNew to={routePaths.ADD_TASK}>
+            <Link to={routePaths.ADD_TASK}><S.HeaderButtonMainNew>
               Создать новую задачу
-            </S.HeaderButtonMainNew>
+            </S.HeaderButtonMainNew></Link>
             <S.HeaderUser onClick={handleOpen}>{user.user.name}</S.HeaderUser>
             {isOpen && (
               <S.HeaderPopUserSet>
