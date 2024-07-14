@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Hover01 } from "../../../lib/shared.styled";
+import { DayPicker } from "react-day-picker";
 
 export const PopNewCard = styled.div`
   width: 100%;
@@ -53,6 +54,7 @@ export const PopNewCardWrap = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+  
 `;
 
 export const PopNewCardForm = styled.div`
@@ -192,3 +194,23 @@ export const FormNewCreate = styled.button`
 
   ${Hover01}
 `;
+
+export const Calendar = styled(DayPicker)`
+  font-size: 10px;
+  --rdp-cell-size: 22px;
+  --rdp-caption-font-size: 14px;
+  color: #94a6be;
+  margin: 0;
+`;
+export const DateTitle = styled.p`
+  margin-bottom: 14px;
+  padding: 0 7px;
+  color: #000;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+`;
+
+export const PopNewCardCalendar = styled.div`
+
+`

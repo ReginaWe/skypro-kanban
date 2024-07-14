@@ -1,11 +1,11 @@
 import { useState } from "react";
-import Calendar from "../../Calendar/Calendar";
 import { routePaths } from "../../../AppRoutes";
 import { useUser } from "../../../hooks/useUser";
 import { Link, useNavigate } from "react-router-dom";
 import { addTask } from "../../../api/tasks";
 import * as S from "./PopNewCard.styled";
 import { useTasks } from "../../../hooks/useTasks";
+import { ru } from "date-fns/locale/ru";
 
 const PopNewCard = () => {
   const { user } = useUser();
@@ -35,7 +35,7 @@ const PopNewCard = () => {
       date,
     };
 
-    if (!task.title || !task.description || !task.date) {
+    if (!task.title || !task.description /* || */ /* !task.date */) {
       setError("Пожалуйста, заполните все поля");
       return;
     }
@@ -51,7 +51,11 @@ const PopNewCard = () => {
       });
   };
 
-  console.log(date);
+  const getDateFormat = (date) => {
+    const formatDate = date.toLocaleDateString("ru-US");
+    return <>{formatDate}</>;
+  };
+
   return (
     <S.PopNewCard>
       <S.PopNewCardContainer>
@@ -88,7 +92,16 @@ const PopNewCard = () => {
                   ></S.FormNewArea>
                 </S.FormNewBlock>
               </S.PopNewCardForm>
-              <Calendar mode="single" selected={date} onSelect={setDate} />
+              <S.PopNewCardCalendar>
+                <S.DateTitle>Даты</S.DateTitle>
+                <S.Calendar
+                  locale={ru}
+                  mode="single"
+                  selected={date}
+                  onSelect={setDate}
+                  footer={getDateFormat(date)}
+                />
+              </S.PopNewCardCalendar>
             </S.PopNewCardWrap>
             <S.PopNewCardCategories>
               <S.Categories>Категория</S.Categories>
