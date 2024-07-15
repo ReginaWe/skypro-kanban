@@ -37,7 +37,7 @@ const PopNewCard = () => {
       date,
     };
 
-    if (!task.title || !task.description /* || */ /* !task.date */) {
+    if (!task.title || !task.description ) {
       setError("Пожалуйста, заполните все поля");
       return;
     }
