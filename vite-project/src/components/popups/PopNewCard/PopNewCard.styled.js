@@ -54,7 +54,6 @@ export const PopNewCardWrap = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  
 `;
 
 export const PopNewCardForm = styled.div`
@@ -162,7 +161,7 @@ export const CategoriesTheme = styled.div`
   padding: 8px 20px;
   border-radius: 24px;
   margin-right: 7px;
-  opacity: 0.4;
+  opacity: ${({ $isActive }) => ($isActive ? "1" : "0.4")};
   & p {
     font-size: 14px;
     font-weight: 600;
@@ -211,6 +210,8 @@ export const DateTitle = styled.p`
   line-height: 1;
 `;
 
-export const PopNewCardCalendar = styled.div`
+export const PopNewCardCalendar = styled.div``;
 
-`
+export const RadioInput = styled.input`
+  display: none;
+`;

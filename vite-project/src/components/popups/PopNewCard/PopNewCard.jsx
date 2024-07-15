@@ -14,12 +14,15 @@ const PopNewCard = () => {
 
   const navigate = useNavigate();
 
+  const [topic, setTopic] = useState("");
+
   const [task, setTask] = useState({
     title: "",
-    topic: "Research",
     status: "Без статуса",
     description: "",
   });
+
+  console.log(topic);
 
   const [error, setError] = useState(null);
 
@@ -27,7 +30,6 @@ const PopNewCard = () => {
     e.preventDefault;
 
     const title = task.title || "Новая задача";
-    const topic = task.topic || "Research";
     const newTask = {
       ...task,
       topic,
@@ -106,15 +108,48 @@ const PopNewCard = () => {
             <S.PopNewCardCategories>
               <S.Categories>Категория</S.Categories>
               <S.CategoriesThemes>
-                <S.CategoriesTheme>
-                  <p className="_orange">Web Design</p>
+                <S.CategoriesTheme
+                  $isActive={topic === "Web Design"}
+                  className="categories__theme _orange"
+                >
+                  <label htmlFor="radio1">Web Design</label>
+                  <S.RadioInput
+                    onChange={(e) => setTopic(e.target.value)}
+                    className="_orange"
+                    type="radio"
+                    name="orange"
+                    id="radio1"
+                    value={`Web Design`}
+                  />
                 </S.CategoriesTheme>
-                <div className="categories__theme _green">
-                  <p className="_green">Research</p>
-                </div>
-                <div className="categories__theme _purple">
-                  <p className="_purple">Copywriting</p>
-                </div>
+                <S.CategoriesTheme
+                  $isActive={topic === "Research"}
+                  className="categories__theme _green"
+                >
+                  <label htmlFor="radio2">Research</label>
+                  <S.RadioInput
+                    onChange={(e) => setTopic(e.target.value)}
+                    className="_green"
+                    type="radio"
+                    name="green"
+                    id="radio2"
+                    value={`Research`}
+                  />
+                </S.CategoriesTheme>
+                <S.CategoriesTheme
+                  $isActive={topic === "Copywriting"}
+                  className="categories__theme _purple"
+                >
+                  <label htmlFor="radio3">Copywriting</label>
+                  <S.RadioInput
+                    onChange={(e) => setTopic(e.target.value)}
+                    className="_purple"
+                    type="radio"
+                    name="purple"
+                    id="radio3"
+                    value={`Copywriting`}
+                  />
+                </S.CategoriesTheme>
               </S.CategoriesThemes>
             </S.PopNewCardCategories>
             {error && <p>{error}</p>}
