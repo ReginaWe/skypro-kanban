@@ -1,9 +1,29 @@
 import Calendar from "../../Calendar/Calendar";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import * as S from "./PopBrowse.styled";
+import { useUser } from "../../../hooks/useUser";
+import { useTasks } from "../../../hooks/useTasks";
+import { useState } from "react";
+import { editTask } from "../../../api/tasks";
+import { routePaths } from "../../../AppRoutes";
 
 const PopBrowse = () => {
   const { _id } = useParams();
+  const { user } = useUser();
+  const { cards, setCards } = useTasks();
+  const navigate = useNavigate();
+  const [error, setError] = useState(null);
+
+  function redactTask() {
+    editTask({ token, task, _id })
+      .then((response) => {
+        setCards(response.tasks);
+        navigate(routePaths.MAIN);
+      })
+      .catch((err) => {
+        setError(err.message);
+      });
+  }
   return (
     <S.PopBrowse>
       <S.PopBrowseContainer>
@@ -57,7 +77,10 @@ const PopBrowse = () => {
             </div>
             <div className="pop-browse__btn-browse ">
               <div className="btn-group">
-                <button className="btn-browse__edit _btn-bor _hover03">
+                <button
+                  onClick={redactTask}
+                  className="btn-browse__edit _btn-bor _hover03"
+                >
                   <a href="#">Редактировать задачу</a>
                 </button>
                 <button className="btn-browse__delete _btn-bor _hover03">

@@ -16,6 +16,8 @@ export async function getTodos({ token }) {
     return data;
   }
 
+
+  //Добавление списка задач
 export async function addTask ({ token, task }) {
     const response = await fetch(baseHost, {
         method: "POST",
@@ -30,4 +32,21 @@ export async function addTask ({ token, task }) {
     }
 
     return response.json()
+}
+
+//Редактирование задачи
+export async function editTask ({ token, task, _id }) {
+  const response = await fetch(baseHost, {
+      method: "PUT",
+      body: JSON.stringify(task),
+      headers: {
+          Authorization: `Bearer ${token}`
+      }
+  })
+
+  if (!response.ok) {
+      throw new Error("Ошибка при редактировании задачи")
+  }
+
+  return response.json()
 }
