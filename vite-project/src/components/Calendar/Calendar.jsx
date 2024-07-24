@@ -5,15 +5,29 @@ import {
   CalendsrCells, */
   NavActions,
 } from  "../../lib/shared.styled";
-import { DayPicker } from "react-day-picker"
+/* import { DayPicker } from "react-day-picker" */
+import { useState } from "react";
+import { format } from "date-fns";
+import { ru } from "date-fns/locale/ru";
 
 
-const Calendar = ({ selected, setSelected }) => {
+const Calendar = ({date, setDate}) => {
+  const getDateFormat = (date) => {
+    /* const formatDate = date.toLocaleDateString("ru-US"); */
+   /*  return <>{formatDate}</>; */
+    return (
+      <S.CalendarPeriod>
+        <S.CalendarDateEnd>
+          Срок исполнения: <span className="date-control">{format(date, "dd.MM.yy")}</span>
+        </S.CalendarDateEnd>
+      </S.CalendarPeriod>
+    )
+  };
   return (
     <S.Calendar>
       <S.CalendarTitle>Даты</S.CalendarTitle>
       <S.CalendarBlock>
-        <S.CalendarNav>
+        {/* <S.CalendarNav>
           <S.CalendarMonth>Сентябрь 2023</S.CalendarMonth>
           <NavActions>
             <S.CalendarNavAction data-action="prev">
@@ -37,65 +51,15 @@ const Calendar = ({ selected, setSelected }) => {
               </svg>
             </S.CalendarNavAction>
           </NavActions>
-        </S.CalendarNav>
+        </S.CalendarNav> */}
         <S.CalendarContent>
-          {/* <CalendarDaysNames>
-            <CalendarDayName>пн</CalendarDayName>
-            <CalendarDayName>вт</CalendarDayName>
-            <CalendarDayName>ср</CalendarDayName>
-            <CalendarDayName>чт</CalendarDayName>
-            <CalendarDayName>пт</CalendarDayName>
-            <CalendarDayName>сб</CalendarDayName>
-            <CalendarDayName>вс</CalendarDayName>
-          </CalendarDaysNames>
-          <CalendsrCells>
-            <div className="calendar__cell _other-month">28</div>
-            <div className="calendar__cell _other-month">29</div>
-            <div className="calendar__cell _other-month">30</div>
-            <div className="calendar__cell _cell-day">31</div>
-            <div className="calendar__cell _cell-day">1</div>
-            <div className="calendar__cell _cell-day _weekend">2</div>
-            <div className="calendar__cell _cell-day _weekend">3</div>
-            <div className="calendar__cell _cell-day">4</div>
-            <div className="calendar__cell _cell-day">5</div>
-            <div className="calendar__cell _cell-day ">6</div>
-            <div className="calendar__cell _cell-day">7</div>
-            <div className="calendar__cell _cell-day _current">8</div>
-            <div className="calendar__cell _cell-day _weekend _active-day">
-              9
-            </div>
-            <div className="calendar__cell _cell-day _weekend">10</div>
-            <div className="calendar__cell _cell-day">11</div>
-            <div className="calendar__cell _cell-day">12</div>
-            <div className="calendar__cell _cell-day">13</div>
-            <div className="calendar__cell _cell-day">14</div>
-            <div className="calendar__cell _cell-day">15</div>
-            <div className="calendar__cell _cell-day _weekend">16</div>
-            <div className="calendar__cell _cell-day _weekend">17</div>
-            <div className="calendar__cell _cell-day">18</div>
-            <div className="calendar__cell _cell-day">19</div>
-            <div className="calendar__cell _cell-day">20</div>
-            <div className="calendar__cell _cell-day">21</div>
-            <div className="calendar__cell _cell-day">22</div>
-            <div className="calendar__cell _cell-day _weekend">23</div>
-            <div className="calendar__cell _cell-day _weekend">24</div>
-            <div className="calendar__cell _cell-day">25</div>
-            <div className="calendar__cell _cell-day">26</div>
-            <div className="calendar__cell _cell-day">27</div>
-            <div className="calendar__cell _cell-day">28</div>
-            <div className="calendar__cell _cell-day">29</div>
-            <div className="calendar__cell _cell-day _weekend">30</div>
-            <div className="calendar__cell _other-month _weekend">1</div>
-          </CalendsrCells> */}
-          <DayPicker mode="single" selected={selected} onSelect={setSelected}/>
+          <S.CalendarDayPicker /* mode="single" selected={selected} onSelect={setSelected} */
+          locale={ru}
+          mode="single"
+          selected={date}
+          onSelect={setDate}
+          footer={getDateFormat(date)}/>
         </S.CalendarContent>
-
-        <input type="hidden" id="datepick_value" value="08.09.2023" />
-        <S.CalendarPeriod>
-          <S.CalendarDateEnd>
-            Срок исполнения: <span className="date-control">09.09.23</span>
-          </S.CalendarDateEnd>
-        </S.CalendarPeriod>
       </S.CalendarBlock>
     </S.Calendar>
   );

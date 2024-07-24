@@ -3,19 +3,45 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import * as S from "./PopBrowse.styled";
 import { useUser } from "../../../hooks/useUser";
 import { useTasks } from "../../../hooks/useTasks";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { editTask } from "../../../api/tasks";
 import { routePaths } from "../../../AppRoutes";
 
 const PopBrowse = () => {
-  const { _id } = useParams();
+  const { id } = useParams();
   const { user } = useUser();
   const { cards, setCards } = useTasks();
   const navigate = useNavigate();
   const [error, setError] = useState(null);
+  const [task, setTask] = useState({
+    title: "",
+    status: "Без статуса",
+    description: "",
+  })
+
+  const [topic, setTopic] = useState("");
+  const [date, setDate] = useState(new Date());
+  const [editMode, setEditMode] = useState(false)
+
+  useEffect(() => {
+    const task = cards.filter((card) => card._id === id)[0]
+
+    setTask({
+      title: task.title,
+      status: task.status,
+      description: task.description,
+    })
+    setTopic(task.topic)
+    setDate(new Date(task.date))
+  }, [id])
 
   function redactTask() {
-    editTask({ token, task, _id })
+    if (!task.description) {
+      setError("Пожалуйста, заполните все поля");
+      return;
+    }
+
+    editTask({ token: user.user.token, task, id })
       .then((response) => {
         setCards(response.tasks);
         navigate(routePaths.MAIN);
@@ -30,31 +56,31 @@ const PopBrowse = () => {
         <S.PopBrowseBlock>
           <S.PopBrowseContent>
             <S.PopBrowseTopBlock>
-              <S.PopBrowseTitle>Название задачи {_id}</S.PopBrowseTitle>
-              <div className="categories__theme theme-top _orange _active-category">
-                <p className="_orange">Web Design</p>
-              </div>
+              <S.PopBrowseTitle>{task.title}</S.PopBrowseTitle>
+              <S.CategoriesTheme $isActive={true} $topic={topic}>
+                <p>{topic}</p>
+              </S.CategoriesTheme>
             </S.PopBrowseTopBlock>
-            <div className="pop-browse__status status">
-              <p className="status__p subttl">Статус</p>
-              <div className="status__themes">
-                <div className="status__theme _hide">
+            <S.Status>
+              <S.StatusTitle>Статус</S.StatusTitle>
+              <S.StatusThemes>
+                <S.StatusTheme className="status__theme _hide">
                   <p>Без статуса</p>
-                </div>
-                <div className="status__theme _gray">
-                  <p className="_gray">Нужно сделать</p>
-                </div>
-                <div className="status__theme _hide">
+                </S.StatusTheme>
+                <S.StatusTheme className="status__theme _gray">
+                  <p className="_gray">{task.status}</p>
+                </S.StatusTheme>
+                <S.StatusTheme className="status__theme _hide">
                   <p>В работе</p>
-                </div>
-                <div className="status__theme _hide">
+                </S.StatusTheme>
+                <S.StatusTheme className="status__theme _hide">
                   <p>Тестирование</p>
-                </div>
-                <div className="status__theme _hide">
+                </S.StatusTheme>
+                <S.StatusTheme className="status__theme _hide">
                   <p>Готово</p>
-                </div>
-              </div>
-            </div>
+                </S.StatusTheme>
+              </S.StatusThemes>
+            </S.Status>
             <S.PopBrowseWrap>
               <S.PopBrowseForm id="formBrowseCard" action="#">
                 <S.FormBrowseBlock>
@@ -64,10 +90,11 @@ const PopBrowse = () => {
                     id="textArea01"
                     readOnly
                     placeholder="Введите описание задачи..."
-                  ></S.PopBrowseArea>
+                    value={task.description}
+                  />
                 </S.FormBrowseBlock>
               </S.PopBrowseForm>
-              <Calendar />
+              <Calendar date={date} setDate={setDate} />
             </S.PopBrowseWrap>
             <div className="theme-down__categories theme-down">
               <p className="categories__p subttl">Категория</p>
@@ -75,6 +102,7 @@ const PopBrowse = () => {
                 <p className="_orange">Web Design</p>
               </div>
             </div>
+            {error && <p>{error}</p>}
             <div className="pop-browse__btn-browse ">
               <div className="btn-group">
                 <button

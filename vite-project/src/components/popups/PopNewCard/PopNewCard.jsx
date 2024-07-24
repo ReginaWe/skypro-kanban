@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { addTask } from "../../../api/tasks";
 import * as S from "./PopNewCard.styled";
 import { useTasks } from "../../../hooks/useTasks";
-import { ru } from "date-fns/locale/ru";
+import Calendar from "../../Calendar/Calendar";
 
 const PopNewCard = () => {
   const { user } = useUser();
@@ -37,7 +37,7 @@ const PopNewCard = () => {
       date,
     };
 
-    if (!task.title || !task.description ) {
+    if (!task.title || !task.description) {
       setError("Пожалуйста, заполните все поля");
       return;
     }
@@ -53,10 +53,10 @@ const PopNewCard = () => {
       });
   };
 
-  const getDateFormat = (date) => {
+ /*  const getDateFormat = (date) => {
     const formatDate = date.toLocaleDateString("ru-US");
     return <>{formatDate}</>;
-  };
+  }; */
 
   return (
     <S.PopNewCard>
@@ -95,14 +95,8 @@ const PopNewCard = () => {
                 </S.FormNewBlock>
               </S.PopNewCardForm>
               <S.PopNewCardCalendar>
-                <S.DateTitle>Даты</S.DateTitle>
-                <S.Calendar
-                  locale={ru}
-                  mode="single"
-                  selected={date}
-                  onSelect={setDate}
-                  footer={getDateFormat(date)}
-                />
+                {/* <S.DateTitle>Даты</S.DateTitle> */}
+                <Calendar date={date} setDate={setDate} />
               </S.PopNewCardCalendar>
             </S.PopNewCardWrap>
             <S.PopNewCardCategories>
@@ -110,6 +104,7 @@ const PopNewCard = () => {
               <S.CategoriesThemes>
                 <S.CategoriesTheme
                   $isActive={topic === "Web Design"}
+                  $topic={"Web Design"}
                   className="categories__theme _orange"
                 >
                   <label htmlFor="radio1">Web Design</label>
@@ -124,6 +119,7 @@ const PopNewCard = () => {
                 </S.CategoriesTheme>
                 <S.CategoriesTheme
                   $isActive={topic === "Research"}
+                  $topic={"Research"}
                   className="categories__theme _green"
                 >
                   <label htmlFor="radio2">Research</label>
@@ -138,6 +134,7 @@ const PopNewCard = () => {
                 </S.CategoriesTheme>
                 <S.CategoriesTheme
                   $isActive={topic === "Copywriting"}
+                  $topic={"Copywriting"}
                   className="categories__theme _purple"
                 >
                   <label htmlFor="radio3">Copywriting</label>

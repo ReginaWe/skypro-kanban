@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { SubTitle } from "../../lib/shared.styled";
+import { DayPicker } from "react-day-picker";
 
 export const CalendarBlock = styled.div`
   display: block;
@@ -56,4 +57,12 @@ export const CalendarDateEnd = styled.p`
   & span {
     color: ${({ theme }) => theme.text};
   }
+`;
+
+export const CalendarDayPicker = styled(DayPicker)`
+  font-size: 10px;
+  --rdp-cell-size: 22px;
+  --rdp-caption-font-size: 14px;
+  color: #94a6be;
+  margin: 0;
 `;

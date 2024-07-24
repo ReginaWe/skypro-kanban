@@ -35,8 +35,8 @@ export async function addTask ({ token, task }) {
 }
 
 //Редактирование задачи
-export async function editTask ({ token, task, _id }) {
-  const response = await fetch(baseHost, {
+export async function editTask ({ token, task, id }) {
+  const response = await fetch(`${baseHost}/${id}`, {
       method: "PUT",
       body: JSON.stringify(task),
       headers: {

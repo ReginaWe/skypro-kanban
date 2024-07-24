@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Hover01 } from "../../../lib/shared.styled";
 import { DayPicker } from "react-day-picker";
+import { getStyle } from "../../../lib/topic";
 
 export const PopNewCard = styled.div`
   width: 100%;
@@ -162,19 +163,14 @@ export const CategoriesTheme = styled.div`
   border-radius: 24px;
   margin-right: 7px;
   opacity: ${({ $isActive }) => ($isActive ? "1" : "0.4")};
+
+  ${(props) => getStyle(props.$topic, props.theme.name)};
+
   & p {
     font-size: 14px;
     font-weight: 600;
     line-height: 14px;
     white-space: nowrap;
-  }
-
-  & _orange {
-    background-color: #ffe4c2;
-    color: #ff6d00;
-  }
-  & _active-category {
-    opacity: 1 !important;
   }
 `;
 
