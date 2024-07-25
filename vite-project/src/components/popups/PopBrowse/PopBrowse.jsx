@@ -103,7 +103,7 @@ const PopBrowse = () => {
               </div>
             </div>
             {error && <p>{error}</p>}
-            <div className="pop-browse__btn-browse ">
+            <S.PopBrowseButton>
               <div className="btn-group">
                 <button
                   onClick={redactTask}
@@ -118,7 +118,7 @@ const PopBrowse = () => {
               <button className="btn-browse__close _btn-bg _hover01">
                 <Link to="/">Закрыть</Link>
               </button>
-            </div>
+            </S.PopBrowseButton>
             <div className="pop-browse__btn-edit _hide">
               <div className="btn-group">
                 <button className="btn-edit__edit _btn-bg _hover01">

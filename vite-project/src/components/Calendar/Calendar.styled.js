@@ -65,4 +65,5 @@ export const CalendarDayPicker = styled(DayPicker)`
   --rdp-caption-font-size: 14px;
   color: #94a6be;
   margin: 0;
+  --rdp-accent-color: #94a6be
 `;

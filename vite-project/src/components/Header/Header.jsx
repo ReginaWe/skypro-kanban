@@ -15,37 +15,6 @@ const Header = ({ toggleTheme, theme, /* setCards, cards */ }) => {
     setOpen((prev) => !prev);
   };
 
-  /* const onAddTask = () => {
-    const newTask = {
-      title: "TEST",
-      topic: "Research",
-      date: "19.05.2024",
-      status: "Без статуса",
-      description: ""
-    }
-    addTask ({ token: user.user.token, task: newTask })
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-
-  } */
-
-  /* const onAddCard = () => {
-    console.log("Добавить карточку");
-    const newCards = {
-      id: Date.now(),
-      title: "TEST",
-      topic: "Research",
-      date: "19.05.2024",
-      status: "Без статуса",
-    };
-    const newCardList = [...cards, newCards];
-    setCards(newCardList);
-  }; */
-
   return (
     <S.Header>
       <Container>

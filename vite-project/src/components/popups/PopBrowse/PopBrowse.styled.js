@@ -1,12 +1,13 @@
 import styled from "styled-components";
 import { getStyle } from "../../../lib/topic";
+import { Hover01, Hover03 } from "../../../lib/shared.styled";
 
 export const PopBrowse = styled.div`
   width: 100%;
   height: 100%;
   min-width: 375px;
   min-height: 100vh;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 7;
@@ -78,6 +79,17 @@ export const PopBrowseWrap = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+`;
+
+export const PopBrowseButton = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  height: 30px;
+  margin-bottom: 10px;
+  padding: 0 14px;
+  margin-right: 8px;
 `;
 
 export const PopBrowseForm = styled.form`
@@ -162,4 +174,32 @@ export const StatusTheme = styled.div`
     line-height: 1;
     letter-spacing: -0.14px;
   }
+`;
+
+export const BrowseButtons = styled.button`
+  border-radius: 4px;
+  border: 0.7px solid var(--palette-navy-60, #565eef);
+  outline: none;
+  background: transparent;
+  color: #565eef;
+
+  & a {
+    color: #565eef;
+  }
+
+  ${Hover03}
+`;
+
+export const Buttons = styled.button`
+  border-radius: 4px;
+  background: #565eef;
+  border: none;
+  outline: none;
+  color: #ffffff;
+
+  & a {
+    color: #ffffff;
+  }
+
+  ${Hover01}
 `;
