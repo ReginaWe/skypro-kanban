@@ -84,12 +84,19 @@ export const PopBrowseWrap = styled.div`
 export const PopBrowseButton = styled.div`
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-start;
   justify-content: space-between;
-  height: 30px;
-  margin-bottom: 10px;
-  padding: 0 14px;
-  margin-right: 8px;
+  margin-top: 20px;
+
+  & button {
+    height: 30px;
+    margin-bottom: 10px;
+    padding: 0 14px;
+  }
+`;
+
+export const PopBrowseButtonInner = styled.div`
+  display: flex;
+  gap: 8px;
 `;
 
 export const PopBrowseForm = styled.form`
@@ -111,12 +118,16 @@ export const SubTitleBrowse = styled.label`
   line-height: 1;
 `;
 
-export const PopBrowseArea = styled.textarea`
+export const PopBrowseArea = styled.textarea.attrs((props) => {
+  return {
+    readOnly: !props.$editMode,
+  }
+})`
   max-width: 370px;
   width: 100%;
   outline: none;
   padding: 14px;
-  background: #eaeef6;
+  background: #fff;
   border: 0.7px solid rgba(148, 166, 190, 0.4);
   border-radius: 8px;
   font-size: 14px;
@@ -125,12 +136,8 @@ export const PopBrowseArea = styled.textarea`
   margin-top: 14px;
   height: 200px;
 
-  &::-moz-placeholder {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 1px;
-    color: #94a6be;
-    letter-spacing: -0.14px;
+  &:read-only {
+    background: #eaeef6;
   }
 
   &::placeholder {

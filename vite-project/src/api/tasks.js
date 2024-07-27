@@ -1,8 +1,10 @@
-const baseHost = "https://wedev-api.sky.pro/api/kanban";
 
-// Получение списка задач
-export async function getTodos({ token }) {
-    const response = await fetch(baseHost, {
+export const API = {
+  baseHost: "https://wedev-api.sky.pro/api/kanban",
+
+  // Получение списка задач
+  async getTodos({ token }) {
+    const response = await fetch(this.baseHost, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -14,39 +16,77 @@ export async function getTodos({ token }) {
   
     const data = await response.json();
     return data;
-  }
-
+  },
 
   //Добавление списка задач
-export async function addTask ({ token, task }) {
-    const response = await fetch(baseHost, {
-        method: "POST",
-        body: JSON.stringify(task),
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
+  async addTask ({ token, task }) {
+    const response = await fetch(this.baseHost, {
+      method: "POST",
+      body: JSON.stringify(task),
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
     })
 
     if (!response.ok) {
-        throw new Error("Ошибка при добавлении задачи")
+      throw new Error("Ошибка при добавлении задачи")
     }
 
     return response.json()
-}
+  },
 
-//Редактирование задачи
-export async function editTask ({ token, task, id }) {
-  const response = await fetch(`${baseHost}/${id}`, {
+  //Редактирование задачи
+  async editTask({ token, task, id }) {
+    const response = await fetch(`${this.baseHost}/${id}`, {
       method: "PUT",
       body: JSON.stringify(task),
       headers: {
-          Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`
       }
-  })
-
-  if (!response.ok) {
+    })
+  
+    if (!response.ok) {
       throw new Error("Ошибка при редактировании задачи")
-  }
+    }
+  
+    return response.json()
+  },
 
-  return response.json()
+  //Удаление задачи
+  async deleteTask({ token, id }) {
+    const response = await fetch(`${this.baseHost}/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+  
+    if (!response.ok) {
+      throw new Error("Ошибка при удалении задачи")
+    }
+  
+    return response.json()
+  },
 }
+
+function name(params) {
+  return {}
+}
+
+const name2 = function (params) {
+  return {}
+}
+
+const name3 = (params) => {
+  return {}
+}
+
+const name3_2 = (params) => {
+  return 0
+}
+
+const name4_2 = (params) => 0
+
+const name4_2_2 = (params) => (0)
+
+const name4_1 = (params) => ({})

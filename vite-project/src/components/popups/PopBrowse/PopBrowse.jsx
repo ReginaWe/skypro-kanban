@@ -1,11 +1,13 @@
 import Calendar from "../../Calendar/Calendar";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import * as S from "./PopBrowse.styled";
 import { useUser } from "../../../hooks/useUser";
 import { useTasks } from "../../../hooks/useTasks";
 import { useEffect, useState } from "react";
-import { editTask } from "../../../api/tasks";
+import { API } from "../../../api/tasks";
 import { routePaths } from "../../../AppRoutes";
+import SharedButton from "../../SharedButton/SharedButton";
+import CategorieGroup from "../../CategorieGroup/CategorieGroup";
 
 const PopBrowse = () => {
   const { id } = useParams();
@@ -35,13 +37,28 @@ const PopBrowse = () => {
     setDate(new Date(task.date))
   }, [id])
 
-  function redactTask() {
+  function handleSetDate(value) {
+    if (!editMode)
+      return
+
+    setDate(value)
+  }
+
+  function startEdit() {
+    setEditMode(true)
+  }
+
+  function cancelEdit() {
+    setEditMode(false)
+  }
+
+  function finishEdit() {
     if (!task.description) {
       setError("Пожалуйста, заполните все поля");
       return;
     }
 
-    editTask({ token: user.user.token, task, id })
+    API.editTask({ token: user.user.token, task, id })
       .then((response) => {
         setCards(response.tasks);
         navigate(routePaths.MAIN);
@@ -50,6 +67,22 @@ const PopBrowse = () => {
         setError(err.message);
       });
   }
+
+  function deleteTask() {
+    API.deleteTask({ token: user.user.token, id })
+      .then((response) => {
+        setCards(response.tasks);
+        navigate(routePaths.MAIN);
+      })
+      .catch((err) => {
+        setError(err.message);
+      });
+  }
+
+  function closePopup() {
+    navigate("/")
+  }
+
   return (
     <S.PopBrowse>
       <S.PopBrowseContainer>
@@ -57,9 +90,11 @@ const PopBrowse = () => {
           <S.PopBrowseContent>
             <S.PopBrowseTopBlock>
               <S.PopBrowseTitle>{task.title}</S.PopBrowseTitle>
-              <S.CategoriesTheme $isActive={true} $topic={topic}>
-                <p>{topic}</p>
-              </S.CategoriesTheme>
+              {editMode || (
+                <S.CategoriesTheme $isActive={true} $topic={topic}>
+                  <p>{topic}</p>
+                </S.CategoriesTheme>
+              )}
             </S.PopBrowseTopBlock>
             <S.Status>
               <S.StatusTitle>Статус</S.StatusTitle>
@@ -86,58 +121,54 @@ const PopBrowse = () => {
                 <S.FormBrowseBlock>
                   <S.SubTitleBrowse>Описание задачи</S.SubTitleBrowse>
                   <S.PopBrowseArea
-                    name="text"
+                    $editMode={editMode}
+                    name="descriptionj"
                     id="textArea01"
-                    readOnly
                     placeholder="Введите описание задачи..."
                     value={task.description}
+                    onChange={(e) =>
+                      setTask({ ...task, description: e.target.value })
+                    }
                   />
                 </S.FormBrowseBlock>
               </S.PopBrowseForm>
-              <Calendar date={date} setDate={setDate} />
+              <Calendar date={date} setDate={handleSetDate} />
             </S.PopBrowseWrap>
-            <div className="theme-down__categories theme-down">
-              <p className="categories__p subttl">Категория</p>
-              <div className="categories__theme _orange _active-category">
-                <p className="_orange">Web Design</p>
-              </div>
-            </div>
+            {editMode && (
+              <CategorieGroup topic={topic} setTopic={setTopic} />
+            )}
             {error && <p>{error}</p>}
             <S.PopBrowseButton>
-              <div className="btn-group">
-                <button
-                  onClick={redactTask}
+              <S.PopBrowseButtonInner>
+                {editMode ? (
+                  <>
+                    <SharedButton $primary={true} className="btn-edit__edit _btn-bg _hover01"
+                  onClick={finishEdit}>
+                      Сохранить
+                    </SharedButton>
+                    <SharedButton $primary={false} className="btn-edit__edit _btn-bor _hover03"
+                  onClick={cancelEdit}>
+                      Отменить
+                    </SharedButton>
+                  </>
+                ) : (
+                  <SharedButton $primary={false} $width={198}
                   className="btn-browse__edit _btn-bor _hover03"
-                >
-                  <a href="#">Редактировать задачу</a>
-                </button>
-                <button className="btn-browse__delete _btn-bor _hover03">
-                  <a href="#">Удалить задачу</a>
-                </button>
-              </div>
-              <button className="btn-browse__close _btn-bg _hover01">
-                <Link to="/">Закрыть</Link>
-              </button>
+                  onClick={startEdit}
+                  >
+                    Редактировать задачу
+                  </SharedButton>
+                )}
+                <SharedButton $primary={false} className="btn-browse__delete _btn-bor _hover03"
+                  onClick={deleteTask}>
+                  Удалить задачу
+                </SharedButton>
+              </S.PopBrowseButtonInner>
+              <SharedButton $primary={true} className="btn-browse__close _btn-bg _hover01"
+                  onClick={closePopup}>
+                Закрыть
+              </SharedButton>
             </S.PopBrowseButton>
-            <div className="pop-browse__btn-edit _hide">
-              <div className="btn-group">
-                <button className="btn-edit__edit _btn-bg _hover01">
-                  <a href="#">Сохранить</a>
-                </button>
-                <button className="btn-edit__edit _btn-bor _hover03">
-                  <a href="#">Отменить</a>
-                </button>
-                <button
-                  className="btn-edit__delete _btn-bor _hover03"
-                  id="btnDelete"
-                >
-                  <a href="#">Удалить задачу</a>
-                </button>
-              </div>
-              <button className="btn-edit__close _btn-bg _hover01">
-                <a href="#">Закрыть</a>
-              </button>
-            </div>
           </S.PopBrowseContent>
         </S.PopBrowseBlock>
       </S.PopBrowseContainer>

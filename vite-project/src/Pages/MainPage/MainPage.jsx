@@ -4,7 +4,7 @@ import Header from "../../components/Header/Header";
 import Main from "../../components/Main/Main";
 import { Wrapper } from "../../global.styled";
 import { Outlet } from "react-router-dom";
-import { getTodos } from "../../api/tasks";
+import { API } from "../../api/tasks";
 import { useUser } from "../../hooks/useUser";
 import { useTasks } from "../../hooks/useTasks";
 
@@ -23,7 +23,7 @@ function MainPage({ theme, setTheme }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await getTodos({
+        const response = await API.getTodos({
           token: user.user.token,
         })
         setCards(response.tasks)
