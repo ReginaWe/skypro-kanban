@@ -68,25 +68,3 @@ export const API = {
     return response.json()
   },
 }
-
-function name(params) {
-  return {}
-}
-
-const name2 = function (params) {
-  return {}
-}
-
-const name3 = (params) => {
-  return {}
-}
-
-const name3_2 = (params) => {
-  return 0
-}
-
-const name4_2 = (params) => 0
-
-const name4_2_2 = (params) => (0)
-
-const name4_1 = (params) => ({})
