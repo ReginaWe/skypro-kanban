@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import * as S from "./Card.styled";
+
+
 const Card = ({ topic, title, date, id }) => {
   return (
     <S.CardsItem>

@@ -1,13 +1,7 @@
 import * as S from "../popups/PopNewCard/PopNewCard.styled"
 
 
-const CategorieGroup = ({ topic, setTopic: __set }) => {
-  function setTopic(value) {
-    console.log(value)
-
-    __set(value)
-  }
-
+const CategorieGroup = ({ topic, setTopic }) => {
   return (
     <S.PopNewCardCategories>
       <S.Categories>Категория</S.Categories>

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { getStyle } from "../../../lib/topic";
 import { Hover01, Hover03 } from "../../../lib/shared.styled";
 
@@ -171,7 +171,7 @@ export const StatusThemes = styled.div`
 export const StatusTheme = styled.div`
   border-radius: 24px;
   border: 0.7px solid rgba(148, 166, 190, 0.4);
-  color: #94a6be;
+  //color: #94a6be;
   padding: 11px 14px 10px;
   margin-right: 7px;
   margin-bottom: 7px;
@@ -181,6 +181,14 @@ export const StatusTheme = styled.div`
     line-height: 1;
     letter-spacing: -0.14px;
   }
+
+  ${(props) => props.$isActive ? css`
+    background: #94a6be;
+    color: #fff;
+  ` : css`
+    background: #fff;
+    color: #94a6be;
+  `}
 `;
 
 export const BrowseButtons = styled.button`
@@ -209,4 +217,8 @@ export const Buttons = styled.button`
   }
 
   ${Hover01}
+`;
+
+export const RadioInputStatus = styled.input`
+  display: none;
 `;

@@ -8,48 +8,60 @@ import { API } from "../../../api/tasks";
 import { routePaths } from "../../../AppRoutes";
 import SharedButton from "../../SharedButton/SharedButton";
 import CategorieGroup from "../../CategorieGroup/CategorieGroup";
+import StatusGroup from "../../StatusGroup/StatusGroup";
 
 const PopBrowse = () => {
   const { id } = useParams();
   const { user } = useUser();
-  const { cards, setCards } = useTasks();
+  const { cards, setCards, readTasksFromServer } = useTasks();
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [task, setTask] = useState({
     title: "",
     status: "Без статуса",
     description: "",
-  })
+    topic: "",
+    date: new Date(),
+  });
 
-  const [topic, setTopic] = useState("");
-  const [date, setDate] = useState(new Date());
-  const [editMode, setEditMode] = useState(false)
+  function setField(key, value) {
+    setTask({ ...task, [key]: value });
+  }
+
+  const [editMode, setEditMode] = useState(false);
 
   useEffect(() => {
-    const task = cards.filter((card) => card._id === id)[0]
+    if (!cards) {
+      readTasksFromServer(user.user.token, null);
+      return;
+    }
+
+    const task = cards.filter((card) => card._id === id)[0];
+
+    if (!task)
+      return navigate("/")
 
     setTask({
       title: task.title,
       status: task.status,
       description: task.description,
-    })
-    setTopic(task.topic)
-    setDate(new Date(task.date))
-  }, [id])
+      topic: task.topic,
+      date: new Date(task.date),
+    });
+  }, [cards, id]);
 
   function handleSetDate(value) {
-    if (!editMode)
-      return
+    if (!editMode) return;
 
-    setDate(value)
+    setField("date", value);
   }
 
   function startEdit() {
-    setEditMode(true)
+    setEditMode(true);
   }
 
   function cancelEdit() {
-    setEditMode(false)
+    setEditMode(false);
   }
 
   function finishEdit() {
@@ -80,8 +92,10 @@ const PopBrowse = () => {
   }
 
   function closePopup() {
-    navigate("/")
+    navigate("/");
   }
+
+  if (!cards) return null;
 
   return (
     <S.PopBrowse>
@@ -91,31 +105,16 @@ const PopBrowse = () => {
             <S.PopBrowseTopBlock>
               <S.PopBrowseTitle>{task.title}</S.PopBrowseTitle>
               {editMode || (
-                <S.CategoriesTheme $isActive={true} $topic={topic}>
-                  <p>{topic}</p>
+                <S.CategoriesTheme $isActive={true} $topic={task.topic}>
+                  <p>{task.topic}</p>
                 </S.CategoriesTheme>
               )}
             </S.PopBrowseTopBlock>
-            <S.Status>
-              <S.StatusTitle>Статус</S.StatusTitle>
-              <S.StatusThemes>
-                <S.StatusTheme className="status__theme _hide">
-                  <p>Без статуса</p>
-                </S.StatusTheme>
-                <S.StatusTheme className="status__theme _gray">
-                  <p className="_gray">{task.status}</p>
-                </S.StatusTheme>
-                <S.StatusTheme className="status__theme _hide">
-                  <p>В работе</p>
-                </S.StatusTheme>
-                <S.StatusTheme className="status__theme _hide">
-                  <p>Тестирование</p>
-                </S.StatusTheme>
-                <S.StatusTheme className="status__theme _hide">
-                  <p>Готово</p>
-                </S.StatusTheme>
-              </S.StatusThemes>
-            </S.Status>
+            <StatusGroup
+              showOne={!editMode}
+              status={task.status}
+              setStatus={(value) => setField("status", value)}
+            />
             <S.PopBrowseWrap>
               <S.PopBrowseForm id="formBrowseCard" action="#">
                 <S.FormBrowseBlock>
@@ -132,40 +131,57 @@ const PopBrowse = () => {
                   />
                 </S.FormBrowseBlock>
               </S.PopBrowseForm>
-              <Calendar date={date} setDate={handleSetDate} />
+              <Calendar date={task.date} setDate={handleSetDate} />
             </S.PopBrowseWrap>
             {editMode && (
-              <CategorieGroup topic={topic} setTopic={setTopic} />
+              <CategorieGroup
+                topic={task.topic}
+                setTopic={(e) => setField("topic", e.target.value)}
+              />
             )}
             {error && <p>{error}</p>}
             <S.PopBrowseButton>
               <S.PopBrowseButtonInner>
                 {editMode ? (
                   <>
-                    <SharedButton $primary={true} className="btn-edit__edit _btn-bg _hover01"
-                  onClick={finishEdit}>
+                    <SharedButton
+                      $primary={true}
+                      className="btn-edit__edit _btn-bg _hover01"
+                      onClick={finishEdit}
+                    >
                       Сохранить
                     </SharedButton>
-                    <SharedButton $primary={false} className="btn-edit__edit _btn-bor _hover03"
-                  onClick={cancelEdit}>
+                    <SharedButton
+                      $primary={false}
+                      className="btn-edit__edit _btn-bor _hover03"
+                      onClick={cancelEdit}
+                    >
                       Отменить
                     </SharedButton>
                   </>
                 ) : (
-                  <SharedButton $primary={false} $width={198}
-                  className="btn-browse__edit _btn-bor _hover03"
-                  onClick={startEdit}
+                  <SharedButton
+                    $primary={false}
+                    $width={198}
+                    className="btn-browse__edit _btn-bor _hover03"
+                    onClick={startEdit}
                   >
                     Редактировать задачу
                   </SharedButton>
                 )}
-                <SharedButton $primary={false} className="btn-browse__delete _btn-bor _hover03"
-                  onClick={deleteTask}>
+                <SharedButton
+                  $primary={false}
+                  className="btn-browse__delete _btn-bor _hover03"
+                  onClick={deleteTask}
+                >
                   Удалить задачу
                 </SharedButton>
               </S.PopBrowseButtonInner>
-              <SharedButton $primary={true} className="btn-browse__close _btn-bg _hover01"
-                  onClick={closePopup}>
+              <SharedButton
+                $primary={true}
+                className="btn-browse__close _btn-bg _hover01"
+                onClick={closePopup}
+              >
                 Закрыть
               </SharedButton>
             </S.PopBrowseButton>
