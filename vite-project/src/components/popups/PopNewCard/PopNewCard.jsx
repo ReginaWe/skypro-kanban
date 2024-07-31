@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { routePaths } from "../../../AppRoutes";
 import { useUser } from "../../../hooks/useUser";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { API } from "../../../api/tasks";
 import * as S from "./PopNewCard.styled";
 import { useTasks } from "../../../hooks/useTasks";
@@ -29,16 +29,19 @@ const PopNewCard = () => {
 
   const createTask = (e) => {
     e.preventDefault;
-
-    const title = task.title || "Новая задача";
+    
     const newTask = {
       ...task,
       topic,
-      title,
       date,
     };
 
-    if (!task.title || !task.description) {
+    if (
+      !newTask.title ||
+      !newTask.description ||
+      !newTask.topic ||
+      !newTask.date
+    ) {
       setError("Пожалуйста, заполните все поля");
       return;
     }
@@ -54,20 +57,13 @@ const PopNewCard = () => {
       });
   };
 
- /*  const getDateFormat = (date) => {
-    const formatDate = date.toLocaleDateString("ru-US");
-    return <>{formatDate}</>;
-  }; */
-
   return (
     <S.PopNewCard>
       <S.PopNewCardContainer>
         <S.PopNewCardBlock>
           <S.PopNewCardContent>
             <S.PopNewCardTitle>Создание задачи</S.PopNewCardTitle>
-            <Link to={routePaths.MAIN} className="pop-new-card__close">
-              &#10006;
-            </Link>
+            <S.LinkPop to={routePaths.MAIN}>&#10006;</S.LinkPop>
             <S.PopNewCardWrap>
               <S.PopNewCardForm>
                 <S.FormNewBlock>
@@ -96,7 +92,6 @@ const PopNewCard = () => {
                 </S.FormNewBlock>
               </S.PopNewCardForm>
               <S.PopNewCardCalendar>
-                {/* <S.DateTitle>Даты</S.DateTitle> */}
                 <Calendar date={date} setDate={setDate} />
               </S.PopNewCardCalendar>
             </S.PopNewCardWrap>

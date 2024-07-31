@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 import { API } from "../../../api/tasks";
 import { routePaths } from "../../../AppRoutes";
 import SharedButton from "../../SharedButton/SharedButton";
-import CategorieGroup from "../../CategorieGroup/CategorieGroup";
 import StatusGroup from "../../StatusGroup/StatusGroup";
 
 const PopBrowse = () => {
@@ -38,8 +37,7 @@ const PopBrowse = () => {
 
     const task = cards.filter((card) => card._id === id)[0];
 
-    if (!task)
-      return navigate("/")
+    if (!task) return navigate("/");
 
     setTask({
       title: task.title,
@@ -104,11 +102,9 @@ const PopBrowse = () => {
           <S.PopBrowseContent>
             <S.PopBrowseTopBlock>
               <S.PopBrowseTitle>{task.title}</S.PopBrowseTitle>
-              {editMode || (
                 <S.CategoriesTheme $isActive={true} $topic={task.topic}>
                   <p>{task.topic}</p>
                 </S.CategoriesTheme>
-              )}
             </S.PopBrowseTopBlock>
             <StatusGroup
               showOne={!editMode}
@@ -133,29 +129,21 @@ const PopBrowse = () => {
               </S.PopBrowseForm>
               <Calendar date={task.date} setDate={handleSetDate} />
             </S.PopBrowseWrap>
-            {editMode && (
+            {/* {editMode && (
               <CategorieGroup
                 topic={task.topic}
                 setTopic={(e) => setField("topic", e.target.value)}
               />
-            )}
+            )} */}
             {error && <p>{error}</p>}
             <S.PopBrowseButton>
               <S.PopBrowseButtonInner>
                 {editMode ? (
                   <>
-                    <SharedButton
-                      $primary={true}
-                      className="btn-edit__edit _btn-bg _hover01"
-                      onClick={finishEdit}
-                    >
+                    <SharedButton $primary={true} onClick={finishEdit}>
                       Сохранить
                     </SharedButton>
-                    <SharedButton
-                      $primary={false}
-                      className="btn-edit__edit _btn-bor _hover03"
-                      onClick={cancelEdit}
-                    >
+                    <SharedButton $primary={false} onClick={cancelEdit}>
                       Отменить
                     </SharedButton>
                   </>
@@ -163,25 +151,16 @@ const PopBrowse = () => {
                   <SharedButton
                     $primary={false}
                     $width={198}
-                    className="btn-browse__edit _btn-bor _hover03"
                     onClick={startEdit}
                   >
                     Редактировать задачу
                   </SharedButton>
                 )}
-                <SharedButton
-                  $primary={false}
-                  className="btn-browse__delete _btn-bor _hover03"
-                  onClick={deleteTask}
-                >
+                <SharedButton $primary={false} onClick={deleteTask}>
                   Удалить задачу
                 </SharedButton>
               </S.PopBrowseButtonInner>
-              <SharedButton
-                $primary={true}
-                className="btn-browse__close _btn-bg _hover01"
-                onClick={closePopup}
-              >
+              <SharedButton $primary={true} onClick={closePopup}>
                 Закрыть
               </SharedButton>
             </S.PopBrowseButton>

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import * as S from "./Card.styled";
+import { format } from "date-fns";
 
 
 const Card = ({ topic, title, date, id }) => {
@@ -51,7 +52,7 @@ const Card = ({ topic, title, date, id }) => {
                 </clipPath>
               </defs>
             </svg>
-            <S.CardDateValue>{date}</S.CardDateValue>
+            <S.CardDateValue>{format(date, "dd.MM.yy")}</S.CardDateValue>
           </S.CardDate>
         </S.CardContent>
       </S.CardsCard>

@@ -176,7 +176,7 @@ export const StatusTheme = styled.div`
   margin-right: 7px;
   margin-bottom: 7px;
 
-  & p {
+  & label {
     font-size: 14px;
     line-height: 1;
     letter-spacing: -0.14px;

@@ -10,7 +10,6 @@ import { useTasks } from "../../hooks/useTasks";
 function MainPage({ theme, setTheme }) {
   const { cards, setCards, readTasksFromServer, error } = useTasks();
   const [isLoading, setLoading] = useState(true);
-  //const [error, setError] = useState(null)
   const { user } = useUser();
 
   function toggleTheme() {
@@ -19,20 +18,6 @@ function MainPage({ theme, setTheme }) {
   }
 
   useEffect(() => {
-    // const fetchData = async () => {
-    //   try {
-    //     const response = await API.getTodos({
-    //       token: user.user.token,
-    //     })
-    //     setCards(response.tasks)
-    //   } catch (error) {
-    //     console.error(error)
-    //     setError("Ошибка при получении задач")
-    //   } finally {
-    //     setLoading(false)
-    //   }
-    // }
-    // fetchData()
     if (!cards)
       readTasksFromServer(user.user.token, setLoading);
   }, [user]);

@@ -38,7 +38,6 @@ const LoginPage = () => {
         password: formValues.password,
       });
       setLogin(response);
-      /* localStorage.setItem('user', JSON.stringify(response)) */
       navigate(routePaths.MAIN);
 
       console.log("LOGIN RESPONSE", response);

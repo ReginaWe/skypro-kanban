@@ -40,7 +40,6 @@ const Header = ({ toggleTheme, theme, /* setCards, cards */ }) => {
                   <p>Темная тема</p>
                   <S.Checkbox
                     type="checkbox"
-                    className="checkbox"
                     name="checkbox"
                     onClick={toggleTheme}
                   />

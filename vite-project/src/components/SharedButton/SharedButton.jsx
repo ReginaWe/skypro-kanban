@@ -11,6 +11,7 @@ const SharedButton = styled.button`
   line-height: 21px;
   font-weight: 500;
   letter-spacing: -0.14px;
+  color: #565EEF;
 
   & a {
     width: 100%;

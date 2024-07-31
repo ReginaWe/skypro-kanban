@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Hover01 } from "../../../lib/shared.styled";
 import { DayPicker } from "react-day-picker";
 import { getStyle } from "../../../lib/topic";
+import { Link } from "react-router-dom";
 
 export const PopNewCard = styled.div`
   width: 100%;
@@ -210,4 +211,15 @@ export const PopNewCardCalendar = styled.div``;
 
 export const RadioInput = styled.input`
   display: none;
+`;
+
+export const LinkPop = styled(Link)`
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  color: #94a6be;
+
+  &:hover {
+    color: black;
+  }
 `;

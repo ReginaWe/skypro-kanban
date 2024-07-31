@@ -14,14 +14,11 @@ const PopExit = () => {
           <S.PopExitTtl>
             <h2>Выйти из аккаунта?</h2>
           </S.PopExitTtl>
-          <form className="pop-exit__form" id="formExit" action="#">
+          <form>
             <S.PopExitFormGroup>
               <S.PopExitButtonYes id="exitYes" onClick={handleLogOut}>
                 Да, выйти
               </S.PopExitButtonYes>
-              {/* <S.PopExitButtonYes id="exitYes" onClick={() => setIsAuth(false)}>
-                <Link to={routePathss.MAIN}>Да, выйти</Link>
-              </S.PopExitButtonYes> */}
               <S.PopExitButtonNo id="exitNo">
                 <Link to={routePaths.MAIN}>Нет, остаться</Link>
               </S.PopExitButtonNo>
